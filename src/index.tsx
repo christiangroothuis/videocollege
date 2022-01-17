@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import App from "./pages/Home";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Presentation } from "./Presentation";
-import { Player } from "./Player";
+import { Presentation } from "./pages/Presentation";
 import { SWRConfig } from "swr";
 
 ReactDOM.render(
@@ -22,7 +21,7 @@ ReactDOM.render(
 				<Routes>
 					<Route path="/" element={<App />} />
 					<Route path="presentation/:id" element={<Presentation />} />
-					<Route path="player/:id" element={<Player />} />
+					{/* <Route path="player/:id" element={<Player />} /> */}
 				</Routes>
 			</Router>
 		</SWRConfig>

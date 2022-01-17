@@ -1,60 +1,108 @@
-import useSWR, { SWRConfiguration, SWRResponse } from "swr";
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import useSWR from "swr";
 
-export type GetRequest = AxiosRequestConfig | null;
+const apiUrl = process.env.REACT_APP_API_URL;
+const sfapikey = process.env.REACT_APP_SFAPIKEY;
 
-interface Return<Data, Error>
-	extends Pick<
-		SWRResponse<AxiosResponse<Data>, AxiosError<Error>>,
-		"isValidating" | "error" | "mutate"
-	> {
-	data: Data | undefined;
-	response: AxiosResponse<Data> | undefined;
-}
+const fetcher = async (input: RequestInfo, init?: RequestInit) => {
+	const res = await fetch(input, init);
+	return res.json();
+};
 
-export interface Config<Data = unknown, Error = unknown>
-	extends Omit<
-		SWRConfiguration<AxiosResponse<Data>, AxiosError<Error>>,
-		"fallbackData"
-	> {
-	fallbackData?: Data;
-}
-
-export default function useRequest<Data = unknown, Error = unknown>(
-	request: GetRequest,
-	{ fallbackData, ...config }: Config<Data, Error> = {}
-): Return<Data, Error> {
-	const {
-		data: response,
-		error,
-		isValidating,
-		mutate,
-	} = useSWR<AxiosResponse<Data>, AxiosError<Error>>(
-		request && JSON.stringify(request),
-		/**
-		 * NOTE: Typescript thinks `request` can be `null` here, but the fetcher
-		 * function is actually only called by `useSWR` when it isn't.
-		 */
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		() => axios.request<Data>(request!),
-		{
-			...config,
-			fallbackData: fallbackData && {
-				status: 200,
-				statusText: "InitialData",
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				config: request!,
-				headers: {},
-				data: fallbackData,
+export const usePlayCoverInfo = (id: string) => {
+	const { data, error } = useSWR(
+		[
+			`${apiUrl}/Mediasite/PlayerService/PlayerService.svc/json/GetPlayCoverInfo`,
+			{
+				method: "POST",
+				headers: {
+					"content-type": "application/json; charset=UTF-8",
+				},
+				credentials: "include",
+				body: JSON.stringify({ presentationId: id }),
 			},
-		}
+		],
+		fetcher
 	);
 
 	return {
-		data: response && response.data,
-		response,
-		error,
-		isValidating,
-		mutate,
+		data: data?.d,
+		isLoading: !error && !data,
+		isError: error,
 	};
-}
+};
+
+export const usePlayerOptions = (id: string) => {
+	const { data, error } = useSWR(
+		[
+			`${apiUrl}/Mediasite/PlayerService/PlayerService.svc/json/GetPlayerOptions`,
+			{
+				method: "POST",
+				headers: {
+					"content-type": "application/json; charset=UTF-8",
+				},
+				credentials: "include",
+				body: JSON.stringify({
+					getPlayerOptionsRequest: {
+						ResourceId: id,
+						QueryString:
+							"?autostart=true&playfrom=0&covertitle=false&cover=false",
+						UseScreenReader: false,
+					},
+				}),
+			},
+		],
+		fetcher
+	);
+
+	return {
+		data: data?.d,
+		isLoading: !error && !data,
+		isError: error,
+	};
+};
+
+export const useSearch = (query: string, page = 1, amountPerPage = 24) => {
+	const { data, error } = useSWR(
+		[
+			`${apiUrl}/Mediasite/api/v1/Presentations?search=${query}&batchSize=${amountPerPage}&startIndex=${
+				(page - 1) * amountPerPage
+			}&$select=full&searchfields=Title,Description,Captions,Slides,Tags,Presenters,ModuleAssociations,CategoryAssociations&excludeduplicates=True`,
+			{
+				headers: {
+					"content-type": "application/json; charset=UTF-8",
+					sfapikey,
+				},
+				credentials: "include",
+			},
+		],
+		fetcher
+	);
+
+	return {
+		data,
+		isLoading: !error && !data,
+		isError: error,
+	};
+};
+
+export const usePresentation = (id: string) => {
+	const { data, error } = useSWR(
+		[
+			`${apiUrl}/Mediasite/api/v1/Presentations('${id}')?$select=full`,
+			{
+				headers: {
+					"content-type": "application/json; charset=UTF-8",
+					sfapikey,
+				},
+				credentials: "include",
+			},
+		],
+		fetcher
+	);
+
+	return {
+		data,
+		isLoading: !error && !data,
+		isError: error,
+	};
+};
