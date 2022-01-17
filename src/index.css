@@ -10,6 +10,10 @@ body {
     @apply bg-bg;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .line-clamp-1 {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -26,16 +30,4 @@ body {
     -webkit-line-clamp: 2;
     /* number of lines to show */
     -webkit-box-orient: vertical;
-}
-
-.player-container {
-    @apply w-10/12 h-5/6 flex bg-black rounded-xl relative overflow-hidden p-4 justify-center items-center flex-col;
-}
-
-.player-container.horizontal {
-    @apply flex-row;
-}
-
-.player-container.vertical {
-    @apply flex-col;
 }
