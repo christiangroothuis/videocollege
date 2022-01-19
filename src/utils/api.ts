@@ -1,6 +1,7 @@
+import useSWR from "swr";
+
 import { PlayerOptions } from "@/interfaces/PlayerOptions.interface";
 import { Presentations, Value } from "@/interfaces/Presentations.interface";
-import useSWR from "swr";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const sfapikey = process.env.REACT_APP_SFAPIKEY;
