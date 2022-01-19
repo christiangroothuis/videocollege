@@ -3,11 +3,7 @@ import PresentationPreview from "../components/PresentationThumbnail";
 import { useSearch } from "../utils/api";
 
 const Home = () => {
-	const {
-		data,
-		isLoading,
-		// isError
-	} = useSearch({
+	const { data, isLoading, isError } = useSearch({
 		query: `3NAB0-BDS_BCS_BPT_BSI  Type:Presentation CreatedUtc:[201701180000 TO 201901182359] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
 		orderBy: "RecordDate asc",
 	});
