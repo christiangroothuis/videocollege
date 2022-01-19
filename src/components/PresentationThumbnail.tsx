@@ -28,11 +28,8 @@ const PresentationPreview = ({
 		"#023E73",
 		"#0AADBF",
 		"#97BF41",
-		"#F28627",
-		"#E88C17",
 		"#F27218",
 		"#DB5220",
-		"#F23318",
 		"#E81729",
 	];
 	// const colors = ["#E88C17", "#F27218", "#DB5220", "#F23318", "#E81729"];
@@ -51,14 +48,14 @@ const PresentationPreview = ({
 				className={`mb-2 aspect-video shadow-2xl rounded overflow-hidden relative`}
 				style={{ backgroundColor: color.current }}
 			>
-				{image && (
+				{/* {image && (
 					<ProxiedImage
 						src={image}
 						className="w-full h-full object-cover"
 						alt=""
 					/>
-				)}
-				<div className="absolute right-0 bottom-0 bg-black bg-opacity-80 font-medium text-[.8rem] px-1 rounded-sm m-2">
+				)} */}
+				<div className="absolute right-0 bottom-0 bg-black bg-opacity-80 font-medium text-[.8rem] px-1 rounded-sm m-1">
 					{HHmmss}
 				</div>
 			</div>
