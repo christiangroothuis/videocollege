@@ -1,5 +1,5 @@
-import { Value } from "../interfaces/Presentations.interface";
 import PresentationPreview from "../components/PresentationThumbnail";
+import { Value } from "../interfaces/Presentations.interface";
 import { useSearch } from "../utils/api";
 
 const Home = () => {
