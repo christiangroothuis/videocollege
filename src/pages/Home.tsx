@@ -28,20 +28,18 @@ const Home = () => {
 						Duration,
 						ThumbnailUrl,
 						ParentFolderName,
-					}: Value) => {
-						return (
-							<PresentationPreview
-								key={Id}
-								id={Id}
-								title={Title}
-								presenter={PrimaryPresenter}
-								recordDate={RecordDateLocal}
-								duration={Duration}
-								image={ThumbnailUrl || undefined}
-								course={ParentFolderName}
-							/>
-						);
-					}
+					}: Value) => (
+						<PresentationPreview
+							key={Id}
+							id={Id}
+							title={Title}
+							presenter={PrimaryPresenter}
+							recordDate={RecordDateLocal}
+							duration={Duration}
+							image={ThumbnailUrl || undefined}
+							course={ParentFolderName}
+						/>
+					)
 				)}
 			</div>
 		</div>
