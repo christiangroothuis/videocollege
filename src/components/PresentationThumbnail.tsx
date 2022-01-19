@@ -1,6 +1,8 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { dateToLocaleDateString } from "../utils/dateToLocaleDateString";
 import { msToHHmmss } from "../utils/msToHHmmss";
+import { ProxiedImage } from "./ProxiedImage";
 
 const PresentationPreview = ({
 	id,
@@ -21,18 +23,36 @@ const PresentationPreview = ({
 }) => {
 	const HHmmss = msToHHmmss(duration);
 
+	const colors = [
+		"#D9184B",
+		"#023E73",
+		"#0AADBF",
+		"#97BF41",
+		"#F28627",
+		"#E88C17",
+		"#F27218",
+		"#DB5220",
+		"#F23318",
+		"#E81729",
+	];
+	// const colors = ["#E88C17", "#F27218", "#DB5220", "#F23318", "#E81729"];
+	// const colors = ["#9C2C00", "#FF5B19", "#E84200", "#009C82", "#00E8C1"];
+
+	const color: any = useRef(
+		colors[Math.floor(Math.random() * (colors.length - 1))]
+	);
+
 	return (
 		<Link
-			to={`presentation/${id}`}
+			to={`/presentation/${id}`}
 			className="p-5 bg-primary hover:bg-white hover:bg-opacity-10 transition-colors duration-300 rounded cursor-pointer"
 		>
 			<div
-				className={`${
-					image ? "bg-green-600" : "bg-red-500"
-				} mb-2 aspect-video shadow-2xl rounded overflow-hidden relative`}
+				className={`mb-2 aspect-video shadow-2xl rounded overflow-hidden relative`}
+				style={{ backgroundColor: color.current }}
 			>
 				{image && (
-					<img
+					<ProxiedImage
 						src={image}
 						className="w-full h-full object-cover"
 						alt=""
