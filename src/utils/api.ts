@@ -1,3 +1,5 @@
+import { PlayerOptions } from "@/interfaces/PlayerOptions.interface";
+import { Presentations, Value } from "@/interfaces/Presentations.interface";
 import useSWR from "swr";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -15,7 +17,7 @@ export const usePlayCoverInfo = (id: string) => {
 			{
 				method: "POST",
 				headers: {
-					"content-type": "application/json; charset=UTF-8",
+					"content-type": "text/plain",
 				},
 				credentials: "include",
 				body: JSON.stringify({ presentationId: id }),
@@ -31,14 +33,16 @@ export const usePlayCoverInfo = (id: string) => {
 	};
 };
 
-export const usePlayerOptions = (id: string) => {
+export const usePlayerOptions = (
+	id: string
+): { data: PlayerOptions; isLoading: boolean; isError: boolean } => {
 	const { data, error } = useSWR(
 		[
 			`${apiUrl}/Mediasite/PlayerService/PlayerService.svc/json/GetPlayerOptions`,
 			{
 				method: "POST",
 				headers: {
-					"content-type": "application/json; charset=UTF-8",
+					"content-type": "text/plain",
 				},
 				credentials: "include",
 				body: JSON.stringify({
@@ -61,12 +65,30 @@ export const usePlayerOptions = (id: string) => {
 	};
 };
 
-export const useSearch = (query: string, page = 1, amountPerPage = 24) => {
+interface SearchParams {
+	query: string;
+	page?: number;
+	amountPerPage?: number;
+	orderBy?: string;
+	select?: string;
+}
+
+export const useSearch = ({
+	query,
+	page = 1,
+	amountPerPage = 24,
+	orderBy = "RecordDate desc",
+	select = "full",
+}: SearchParams): {
+	data: Presentations;
+	isLoading: boolean;
+	isError: boolean;
+} => {
 	const { data, error } = useSWR(
 		[
 			`${apiUrl}/Mediasite/api/v1/Presentations?search=${query}&batchSize=${amountPerPage}&startIndex=${
 				(page - 1) * amountPerPage
-			}&$select=full&searchfields=Title,Description,Captions,Slides,Tags,Presenters,ModuleAssociations,CategoryAssociations&excludeduplicates=True`,
+			}&$orderby=${orderBy}&$select=${select}&searchfields=Title,Description,Captions,Slides,Tags,Presenters,ModuleAssociations,CategoryAssociations&excludeduplicates=True`,
 			{
 				headers: {
 					"content-type": "application/json; charset=UTF-8",
@@ -85,10 +107,13 @@ export const useSearch = (query: string, page = 1, amountPerPage = 24) => {
 	};
 };
 
-export const usePresentation = (id: string) => {
+export const usePresentation = (
+	id: string,
+	select = "full"
+): { data: Value; isLoading: boolean; isError: boolean } => {
 	const { data, error } = useSWR(
 		[
-			`${apiUrl}/Mediasite/api/v1/Presentations('${id}')?$select=full`,
+			`${apiUrl}/Mediasite/api/v1/Presentations('${id}')?$select=${select}`,
 			{
 				headers: {
 					"content-type": "application/json; charset=UTF-8",

@@ -1,3 +1,4 @@
+import { dateToLocaleDateString } from "../utils/dateToLocaleDateString";
 import { useParams } from "react-router-dom";
 import { Player } from "../components/player";
 import { usePresentation } from "../utils/api";
@@ -5,23 +6,26 @@ import { usePresentation } from "../utils/api";
 export const Presentation = () => {
 	const { id: presentationId } = useParams();
 
-	const {
-		data,
-		// isLoading,
-		// isError,
-	} = usePresentation(presentationId || "");
+	const { data, isLoading, isError } = usePresentation(presentationId!);
 
-	return (
-		<div>
-			<h1 className="font-bold text-4xl">Presentation</h1>
-			<div className="w-full h-screen">
+	if (!isLoading && !isError) {
+		const { Title, RecordDateLocal } = data;
+
+		return (
+			<div>
+				<h1 className="font-bold text-4xl">Presentation</h1>
 				{presentationId && (
 					<Player
-						className="w-full h-full"
+						className="w-full aspect-video min-h-[40rem] max-h-[80vh]"
 						presentationId={presentationId}
 					/>
 				)}
+				<h1>{Title}</h1>
+				<span>{dateToLocaleDateString(RecordDateLocal)}</span>
+				<span>{data.PrimaryPresenter}</span>
 			</div>
-		</div>
-	);
+		);
+	}
+
+	return <div>Loading...</div>;
 };

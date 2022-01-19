@@ -1,9 +1,39 @@
-import { useEffect, useRef, useState } from "react";
-import HlsPlayer from "react-hls-player";
-import { usePlayCoverInfo, usePlayerOptions } from "../../utils/api";
-import "../player.css";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
+import { Video } from "./video";
+import { usePlayCoverInfo, usePlayerOptions } from "../../utils/api";
 import { Stream, VideoURL } from "../../interfaces/PlayerOptions.interface";
+
+import "./player.css";
+
+function ErrorFallback({
+	error,
+	resetErrorBoundary,
+}: {
+	error: Error;
+	resetErrorBoundary: (...args: Array<unknown>) => void;
+}) {
+	return (
+		<div
+			role="alert"
+			className="flex flex-col h-full justify-center items-center bg-black"
+		>
+			<p>Something went wrong:</p>
+			<pre>{error.message}</pre>
+			{error.message === "_ref2 is undefined" && (
+				<div className="text-center text-xl my-3">
+					This type of lecture is not supported :(
+					<br />
+					Support may be added in the future.
+				</div>
+			)}
+			<button className="underline" onClick={resetErrorBoundary}>
+				Try again
+			</button>
+		</div>
+	);
+}
 
 export interface PlayerProps extends React.HTMLAttributes<HTMLDivElement> {
 	presentationId: string;
@@ -28,12 +58,14 @@ export const Player = ({ presentationId, ...props }: PlayerProps) => {
 		// isError,
 	} = usePlayerOptions(presentationId);
 
-	const streams = playerOptions?.Presentation?.Streams.map(
-		(stream: Stream) => {
-			return stream.VideoUrls.filter((videoUrl: VideoURL) => {
-				return videoUrl.MimeType === "audio/x-mpegurl";
-			})[0];
-		}
+	const streams = useMemo(
+		() =>
+			playerOptions?.Presentation?.Streams.map((stream: Stream) => {
+				return stream.VideoUrls.filter((videoUrl: VideoURL) => {
+					return videoUrl.MimeType === "audio/x-mpegurl";
+				})[0];
+			}),
+		[playerOptions]
 	);
 
 	useEffect(() => {
@@ -74,41 +106,31 @@ export const Player = ({ presentationId, ...props }: PlayerProps) => {
 
 	return (
 		<div {...props}>
-			<div
-				className={`player-container w-full h-full ${direction} ${
-					streams?.length > 1 && switched ? "switched" : ""
-				} ${streams?.length > 1 ? "two-streams" : ""}`}
-				ref={playerContainerRef}
+			<ErrorBoundary
+				FallbackComponent={ErrorFallback}
+				onReset={() => {
+					// reset the state of your app so the error doesn't happen again
+				}}
 			>
-				{streams?.length > 0 &&
-					streams.map(({ Location }: VideoURL, i: number) => {
-						return (
-							<div key={i}>
-								<HlsPlayer
-									src={Location}
-									autoPlay={true}
-									controls={false}
-									muted={i !== 0}
-									playerRef={
-										i === 0
-											? primaryVideoRef
-											: secondaryVideoRef
-									}
-								/>
-								<div className="overlay"></div>
-							</div>
-						);
-					})}
-				<span className="top-0 left-0 absolute font-medium">
-					{coverInfo?.Title}
-				</span>
-				<span
-					className="top-0 left-0 absolute font-medium"
-					onClick={() => setSwitched(!switched)}
+				<div
+					className={`player-container w-full h-full ${direction} ${
+						streams?.length > 1 && switched ? "switched" : ""
+					} ${streams?.length > 1 ? "two-streams" : ""}`}
+					ref={playerContainerRef}
 				>
-					Switch
-				</span>
-			</div>
+					<Video
+						streams={streams}
+						primaryVideoRef={primaryVideoRef}
+						secondaryVideoRef={secondaryVideoRef}
+					/>
+					<span
+						className="top-0 right-0 absolute font-medium"
+						onClick={() => setSwitched(!switched)}
+					>
+						Switch
+					</span>
+				</div>
+			</ErrorBoundary>
 		</div>
 	);
 };

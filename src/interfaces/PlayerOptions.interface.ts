@@ -1,8 +1,4 @@
 export interface PlayerOptions {
-	d: D;
-}
-
-export interface D {
 	__type: string;
 	CoverageEvents: any[];
 	GlobalOptions: GlobalOptions;

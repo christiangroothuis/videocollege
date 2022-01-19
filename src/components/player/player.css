@@ -1,5 +1,5 @@
 .player-container {
-    @apply w-10/12 h-5/6 flex bg-black rounded-xl relative overflow-hidden p-4 justify-center items-center flex-col;
+    @apply flex bg-black p-4 relative overflow-hidden justify-center items-center flex-col;
 }
 
 .player-container video {
