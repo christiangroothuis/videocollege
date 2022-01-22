@@ -1,12 +1,18 @@
+import useSWR from "swr";
+
 import { PlayerOptions } from "@/interfaces/PlayerOptions.interface";
 import { Presentations, Value } from "@/interfaces/Presentations.interface";
-import useSWR from "swr";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const sfapikey = process.env.REACT_APP_SFAPIKEY;
 
 const fetcher = async (input: RequestInfo, init?: RequestInit) => {
 	const res = await fetch(input, init);
+
+	if ([401, 403].indexOf(res.status) !== -1) {
+		window.location.href = `https://videocollege.tue.nl/Mediasite/Login/saml?ReturnUrl=${window.location.href}`;
+	}
+
 	return res.json();
 };
 

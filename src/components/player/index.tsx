@@ -3,7 +3,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { Video } from "./video";
 import { usePlayCoverInfo, usePlayerOptions } from "../../utils/api";
-import { Stream, VideoURL } from "../../interfaces/PlayerOptions.interface";
+import { Stream, VideoURL } from "@/interfaces/PlayerOptions.interface";
 
 import "./player.css";
 
