@@ -48,13 +48,17 @@ const PresentationPreview = ({
 				className={`mb-2 aspect-video shadow-2xl rounded overflow-hidden relative`}
 				style={{ backgroundColor: color.current }}
 			>
-				{/* {image && (
+				{image && (
 					<ProxiedImage
+						onError={(e) => {
+							(e.target as HTMLImageElement).style.display =
+								"none";
+						}}
 						src={image}
 						className="w-full h-full object-cover"
 						alt=""
 					/>
-				)} */}
+				)}
 				<div className="absolute right-0 bottom-0 bg-black bg-opacity-80 font-medium text-[.8rem] px-1 rounded-sm m-1">
 					{HHmmss}
 				</div>
