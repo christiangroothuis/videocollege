@@ -9,7 +9,8 @@ export const Presentation = () => {
 	const { data, isLoading, isError } = usePresentation(presentationId!);
 
 	if (!isLoading && !isError) {
-		const { Title, RecordDateLocal } = data;
+		const { Title, RecordDateLocal, NumberOfViews, PrimaryPresenter } =
+			data;
 
 		return (
 			<div>
@@ -22,7 +23,8 @@ export const Presentation = () => {
 				)}
 				<h1>{Title}</h1>
 				<span>{dateToLocaleDateString(RecordDateLocal)}</span>
-				<span>{data.PrimaryPresenter}</span>
+				<span>{PrimaryPresenter}</span>
+				<span>{NumberOfViews}</span>
 			</div>
 		);
 	}
