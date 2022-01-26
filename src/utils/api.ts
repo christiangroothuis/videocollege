@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { SWRConfiguration } from "swr";
 
 import { PlayerOptions } from "@/interfaces/PlayerOptions.interface";
 import { Presentations, Value } from "@/interfaces/Presentations.interface";
@@ -14,6 +14,47 @@ const fetcher = async (input: RequestInfo, init?: RequestInit) => {
 	}
 
 	return res.json();
+};
+
+export const usePresentation = (
+	id: string,
+	select = "full"
+): { data: Value; isLoading: boolean; isError: boolean } => {
+	const { data, error } = useSWR(
+		[
+			`${apiUrl}/Mediasite/api/v1/Presentations('${id}')?$select=${select}`,
+			{
+				headers: {
+					"content-type": "application/json; charset=UTF-8",
+					sfapikey,
+				},
+				credentials: "include",
+			},
+		],
+		fetcher
+	);
+
+	console.log(
+		useSWR(
+			[
+				`${apiUrl}/Mediasite/api/v1/Presentations('${id}')?$select=${select}`,
+				{
+					headers: {
+						"content-type": "application/json; charset=UTF-8",
+						sfapikey,
+					},
+					credentials: "include",
+				},
+			],
+			fetcher
+		)
+	);
+
+	return {
+		data,
+		isLoading: !error && !data,
+		isError: error,
+	};
 };
 
 export const usePlayCoverInfo = (id: string) => {
@@ -77,14 +118,16 @@ interface SearchParams {
 	amountPerPage?: number;
 	orderBy?: string;
 	select?: string;
+	config?: SWRConfiguration;
 }
 
-export const useSearch = ({
+export const usePresentationSearch = ({
 	query,
 	page = 1,
 	amountPerPage = 24,
 	orderBy = "RecordDate desc",
 	select = "full",
+	config,
 }: SearchParams): {
 	data: Presentations;
 	isLoading: boolean;
@@ -103,7 +146,8 @@ export const useSearch = ({
 				credentials: "include",
 			},
 		],
-		fetcher
+		fetcher,
+		config
 	);
 
 	return {
@@ -113,13 +157,24 @@ export const useSearch = ({
 	};
 };
 
-export const usePresentation = (
-	id: string,
-	select = "full"
-): { data: Value; isLoading: boolean; isError: boolean } => {
+export const useChannelSearch = ({
+	query,
+	page = 1,
+	amountPerPage = 24,
+	orderBy = "RecordDate desc",
+	select = "full",
+	config,
+}: SearchParams): {
+	data: Presentations;
+	isLoading: boolean;
+	isError: boolean;
+} => {
 	const { data, error } = useSWR(
 		[
-			`${apiUrl}/Mediasite/api/v1/Presentations('${id}')?$select=${select}`,
+			// `${apiUrl}/Mediasite/api/v1/Presentations?search=${query}&batchSize=${amountPerPage}&startIndex=${
+			`${apiUrl}/Mediasite/api/v1/MediasiteChannels?search=2it80&$top=2000&$orderby=LastModified%20desc
+				(page - 1) * amountPerPage
+			}&$orderby=${orderBy}&$select=${select}&searchfields=Title,Description,Captions,Slides,Tags,Presenters,ModuleAssociations,CategoryAssociations&excludeduplicates=True`,
 			{
 				headers: {
 					"content-type": "application/json; charset=UTF-8",
@@ -128,7 +183,8 @@ export const usePresentation = (
 				credentials: "include",
 			},
 		],
-		fetcher
+		fetcher,
+		config
 	);
 
 	return {

@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+    .blue-gradient {
+        background-image: linear-gradient(135deg, #0a38e8 0%, #0e1e6e 100%);
+    }
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 body {
     margin: 0;
@@ -8,27 +14,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: white;
-    @apply bg-bg;
+    @apply bg-bgprimary;
 }
 
 * {
     box-sizing: border-box;
-}
-
-.line-clamp-1 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    /* number of lines to show */
-    -webkit-box-orient: vertical;
-}
-
-.line-clamp-2 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    /* number of lines to show */
-    -webkit-box-orient: vertical;
 }
