@@ -8,7 +8,7 @@ import { ReactComponent as Home } from "../../assets/icons/home.svg";
 import { ReactComponent as Clock } from "../../assets/icons/clock.svg";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
 
-import logoBg from "../../assets/images/christmas.jpg";
+// import logoBg from "../../assets/images/christmas.jpg";
 
 const Nav = () => {
 	return (
@@ -18,14 +18,15 @@ const Nav = () => {
 				className="flex-auto h-screen pt-4"
 			>
 				<NavIcon to="/" isLogo>
-					<img
+					{/* <img
 						className="absolute top-0 left-0 w-full h-full object-cover"
 						src={logoBg}
 						alt=""
 						width="48"
 						height="48"
-					/>
-					<Logo className="w-9/12 z-10 " />
+					/> */}
+					<div className="absolute top-0 left-0 w-full h-full bg-white"></div>
+					<Logo className="w-9/12 z-10 text-red-700" />
 				</NavIcon>
 
 				<Divider isWide />

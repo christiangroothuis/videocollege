@@ -3,7 +3,11 @@ import { Value } from "@/interfaces/Presentations.interface";
 import { usePresentationSearch } from "../utils/api";
 
 const Home = () => {
-	const { data, isLoading, isError } = usePresentationSearch({
+	const {
+		data,
+		isLoading,
+		// isError
+	} = usePresentationSearch({
 		query: `Type:Presentation  AirDateTimeUtc:[202202260000 TO 202401182359] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
 		orderBy: "RecordDate asc",
 		amountPerPage: 4,

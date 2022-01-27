@@ -13,7 +13,7 @@ export const Presentation = () => {
 		return <div>Error. Try reloading the page</div>;
 	}
 
-	let description = <div>lade</div>;
+	let description = <div>Loading...</div>;
 
 	if (!isLoading) {
 		const { Title, RecordDateLocal, NumberOfViews, PrimaryPresenter } =
@@ -32,18 +32,20 @@ export const Presentation = () => {
 	}
 
 	return (
-		<div className="grid gap-5 xl:grid-cols-[1fr_22rem]">
-			<div className="rounded-lg overflow-hidden bg-bgsecondary">
-				<div className="w-full aspect-video min-h-[50vh] xl:h-[75vh] rounded-lg bg-black relative overflow-hidden">
+		<div className="grid gap-4 xl:grid-cols-[1fr_22rem]">
+			<div className="overflow-hidden ">
+				<div className="w-full aspect-video min-h-[60vh] xl:h-[75vh] max-w-full rounded-2xl bg-black relative overflow-hidden">
 					<PlayerWrapper
 						className="w-full h-full absolute left-0 top-0"
 						presentationId={presentationId!}
 					/>
 				</div>
-				<div className="p-8 pt-7">{description}</div>
+				<div className="p-8 pt-7 min-h-[12rem] bg-bgsecondary mt-3 rounded-2xl">
+					{description}
+				</div>
 			</div>
 			<div>
-				<h1 className="font-bold text-xl py-2">Upcoming lectures</h1>
+				<h1 className="font-bold text-xl py-3">Upcoming lectures</h1>
 				<div className="grid grid-cols-1 gap-2">
 					<SmallThumbnail />
 					<SmallThumbnail />

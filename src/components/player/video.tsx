@@ -18,7 +18,7 @@ export const Video = React.memo(
 					streams.map(({ Location }: VideoURL, i: number) => {
 						return (
 							<div
-								className="video rounded-md overflow-hidden"
+								className="video rounded-lg overflow-hidden"
 								key={Location}
 							>
 								<HlsPlayer
@@ -32,7 +32,7 @@ export const Video = React.memo(
 											: secondaryVideoRef
 									}
 								/>
-								<div className="overlay"></div>
+								<div className="overlay rounded-lg"></div>
 							</div>
 						);
 					})}

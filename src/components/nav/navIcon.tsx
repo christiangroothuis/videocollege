@@ -4,16 +4,22 @@ import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
 interface Props {
 	to: string;
 	isLogo?: boolean;
+	className?: string;
 }
 
-const NavIcon: React.FC<Props> = ({ to, isLogo = false, children }) => {
+const NavIcon: React.FC<Props> = ({
+	to,
+	isLogo = false,
+	className,
+	children,
+}) => {
 	const resolved = useResolvedPath(to);
 	const match = useMatch({ path: resolved.pathname, end: true });
 
 	const active = !isLogo && match;
 
 	return (
-		<NavLink to={to} className={`group nav-item-wrapper`}>
+		<NavLink to={to} className={`group nav-item-wrapper ${className}`}>
 			<div
 				className="absolute top-0 left-0 w-1 h-12
                             flex items-center justify-center"
@@ -33,9 +39,10 @@ const NavIcon: React.FC<Props> = ({ to, isLogo = false, children }) => {
 			<div className="relative w-12 h-12 cursor-pointer">
 				<div
 					className={`bg-bgtertiary relative w-12 h-12
-                                 transition-all duration-200 overflow-hidden
-                                ${!isLogo && `group-hover:rounded-2xl`}
+                                transition-all duration-200 overflow-hidden
+                                group-hover:rounded-2xl
                                 ${active ? `rounded-2xl` : `rounded-3xl`}`}
+					style={{ transform: "translate3d(0, 0, 0)" }}
 				>
 					<div
 						className={`absolute w-full h-full blue-gradient opacity-0

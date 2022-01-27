@@ -23,7 +23,7 @@ export const Player = ({ presentationId, ...props }: PlayerProps) => {
 	const {
 		data: playerOptions,
 		isLoading,
-		isError,
+		// isError,
 	} = usePlayerOptions(presentationId);
 
 	const streams = useMemo(
@@ -49,7 +49,7 @@ export const Player = ({ presentationId, ...props }: PlayerProps) => {
 					setDirection("wide");
 				} else if (aspectRatio > 1.5) {
 					setDirection("horizontal");
-				} else if (aspectRatio > 1.3) {
+				} else if (aspectRatio > 1.32) {
 					setDirection("regular");
 				} else {
 					setDirection("");
@@ -79,7 +79,7 @@ export const Player = ({ presentationId, ...props }: PlayerProps) => {
 					secondaryVideoRef={secondaryVideoRef}
 				/>
 				<span
-					className="top-0 right-0 absolute font-medium p-2 select-none cursor-pointer bg-white text-bgtertiary rounded-lg m-2 shadow-md"
+					className="top-0 right-0 absolute font-medium p-2 select-none cursor-pointer bg-white text-bgtertiary rounded-lg m-3 shadow-md"
 					onClick={() => setSwitched(!switched)}
 				>
 					Switch
