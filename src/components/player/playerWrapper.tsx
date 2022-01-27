@@ -86,7 +86,7 @@ const PlayerPreview: React.FC<PlayePreviewProps> = ({
 	onClick,
 }) => {
 	const {
-		// data: coverInfo,
+		data: coverInfo,
 		isLoading,
 		isError,
 	} = usePlayCoverInfo(presentationId);
@@ -101,11 +101,11 @@ const PlayerPreview: React.FC<PlayePreviewProps> = ({
 		>
 			<img
 				className="absolute w-full h-full top-0 left-0 object-cover opacity-0 transition-opacity duration-300"
-				src={`https://www.vanwijnen.nl/wp-content/uploads/2017/05/BvOF-2018_1213_BBT-gebouw-Atlas-HR-1500x1000.jpg`}
-				// src={`https://videocollege.tue.nl${coverInfo.ThumbnailUrl}`}
+				src={`https://videocollege.tue.nl${coverInfo.ThumbnailUrl}`}
 				alt=""
 				onError={(e) => {
-					(e.target as HTMLImageElement).style.display = "none";
+					(e.target as HTMLImageElement).src =
+						"https://www.vanwijnen.nl/wp-content/uploads/2017/05/BvOF-2018_1213_BBT-gebouw-Atlas-HR-1500x1000.jpg";
 				}}
 				onLoad={(e) => {
 					(e.target as HTMLImageElement).style.opacity = "1";
