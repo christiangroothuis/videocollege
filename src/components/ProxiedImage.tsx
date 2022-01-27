@@ -5,7 +5,7 @@ export const ProxiedImage = ({
 
 	if (proxyUrl) {
 		props.src = props.src?.replace(
-			/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}/,
+			/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}/,
 			proxyUrl
 		);
 	}
