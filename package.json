@@ -11,7 +11,6 @@
         "react-hls-player": "^3.0.7",
         "react-i18next": "^11.15.1",
         "react-router-dom": "^6.2.1",
-        "react-scripts": "5.0.0",
         "swr": "^1.1.1",
         "web-vitals": "^2.1.2"
     },
@@ -53,6 +52,7 @@
         "@types/styled-components": "^5.1.21",
         "autoprefixer": "^10.4.0",
         "postcss": "^8.4.5",
+        "react-scripts": "5.0.0",
         "styled-components": "^5.3.3",
         "tailwindcss": "^3.0.7",
         "typescript": "^4.5.5"
