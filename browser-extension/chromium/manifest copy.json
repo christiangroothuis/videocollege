@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+
+    "name": "Videocollege Helper",
+    "version": "1.0.0",
+    "description": "Gives the videocollege client access to the cookies and API of videocollege.tue.nl",
+
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "cookies",
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "https://videocollege.tue.nl/*",
+        "<all_urls>"
+    ],
+    "host_permissions": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "https://videocollege.tue.nl/*",
+        "<all_urls>"
+    ],
+
+    "background": {
+        "scripts": ["background.js"]
+    },
+
+    "browser_action": {
+        "default_title": "Videocollege Helper",
+        "default_icon": {
+            "128": "media/icon_128.png",
+            "19": "media/icon.png"
+        }
+    }
+}
