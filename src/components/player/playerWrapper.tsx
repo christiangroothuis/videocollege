@@ -25,13 +25,6 @@ function ErrorFallback({
 		>
 			<p>Something went wrong:</p>
 			<pre>{error.message}</pre>
-			{error.message === "_ref2 is undefined" && (
-				<div className="text-center text-xl my-3">
-					This type of lecture is not supported :(
-					<br />
-					Support may be added in the future.
-				</div>
-			)}
 			<button className="underline" onClick={resetErrorBoundary}>
 				Try again
 			</button>
