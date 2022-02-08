@@ -43,9 +43,9 @@ const Nav = () => {
 
 				<Divider />
 
-				<ChannelIcon to="/2it80" text={"2IT80 [2021-2022]"} />
-				<ChannelIcon to="/3nab0" text={"3NAB0 [2021-2022]"} />
-				<ChannelIcon to="/2IP90" text={"2IP90 [2021-2022]"} />
+				<ChannelIcon to="/3IC30" text={"3IC30 [2021-2022]"} />
+				<ChannelIcon to="/2IAB0" text={"2IAB0 [2021-2022]"} />
+				<ChannelIcon to="/2IL50" text={"2IL50 [2021-2022]"} />
 			</div>
 		</nav>
 	);
