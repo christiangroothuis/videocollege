@@ -8,7 +8,7 @@ const Home = () => {
 		isLoading,
 		// isError
 	} = usePresentationSearch({
-		query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation  AirDateTimeUtc:[202202260000 TO 202401182359] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
+		query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation  AirDateTimeUtc:[202202080000 TO 202401182359] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
 		orderBy: "RecordDate asc",
 		amountPerPage: 4,
 	});
