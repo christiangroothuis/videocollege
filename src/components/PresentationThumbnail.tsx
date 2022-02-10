@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { dateToString } from "../utils/dateToString";
+import { dateToText } from "../utils/dateToString";
 import { msToHHmmss } from "../utils/msToHHmmss";
 import { ProxiedImage } from "./ProxiedImage";
 
@@ -47,7 +47,7 @@ const PresentationPreview = ({
 					{title}
 				</h2>
 				<span className="text-[0.8125rem] font-medium leading-tight text-tertiary">
-					{dateToString(recordDate)}
+					{dateToText(recordDate)}
 				</span>
 			</div>
 		</Link>

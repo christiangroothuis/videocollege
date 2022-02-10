@@ -1,6 +1,7 @@
 import PresentationPreview from "../components/PresentationThumbnail";
 import { Value } from "@/interfaces/Presentations.interface";
 import { usePresentationSearch } from "../utils/api";
+import { dateToString } from "../utils/dateToString";
 
 const Home = () => {
 	const {
@@ -8,12 +9,20 @@ const Home = () => {
 		isLoading,
 		// isError
 	} = usePresentationSearch({
-		query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation  AirDateTimeUtc:[202202080000 TO 202401182359] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
+		query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation  AirDateTimeUtc:[${dateToString(
+			new Date()
+		)} TO ${dateToString(
+			new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+		)}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
 		orderBy: "RecordDate asc",
 		amountPerPage: 4,
 	});
 	const { data: data2 } = usePresentationSearch({
-		query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation AirDateTimeUtc:[201701180000 TO 202202070000] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
+		query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation AirDateTimeUtc:[${dateToString(
+			new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+		)} TO ${dateToString(
+			new Date()
+		)}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
 		amountPerPage: 12,
 	});
 	if (isLoading) return <div>Loading...</div>;

@@ -1,4 +1,4 @@
-import { dateToString } from "../../utils/dateToString";
+import { dateToText } from "../../utils/dateToString";
 import { useParams } from "react-router-dom";
 import { usePresentation } from "../../utils/api";
 import { PlayerWrapper } from "../../components/player/playerWrapper";
@@ -24,7 +24,7 @@ export const Presentation = () => {
 				<span className="font-bold text-2xl mb-2">{Title}</span>
 				<div className="text-secondary flex flex-col space-y-4">
 					<span>{NumberOfViews} Views</span>
-					<span>Recorded on {dateToString(RecordDateLocal)}</span>
+					<span>Recorded on {dateToText(RecordDateLocal)}</span>
 					<span>{PrimaryPresenter}</span>
 				</div>
 			</div>
