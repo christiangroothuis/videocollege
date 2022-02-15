@@ -34,3 +34,9 @@ yarn start
 ```
 This runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Useful documentation
+
+- [Apache Lucene](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+- [Mediasite API](https://training.mediasite.com/Mediasite/api/v1/$metadata)
+
