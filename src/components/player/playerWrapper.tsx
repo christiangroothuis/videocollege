@@ -1,10 +1,12 @@
-import { usePlayCoverInfo } from "../../utils/api";
+import { usePlayCoverInfo, usePlayerOptions } from "../../utils/api";
 import React, { useState } from "react";
 import { Player } from "./player";
 import { GridSpinner } from "../Spinner/spinner";
 
 import { ReactComponent as PlayIcon } from "../../assets/icons/play.svg";
 import { ErrorBoundary } from "react-error-boundary";
+import { PlayCoverInfo } from "@/interfaces/PlayCoverInfo.interface";
+import { PlayerOptions } from "@/interfaces/PlayerOptions.interface";
 
 interface Props {
 	presentationId: string;
@@ -53,16 +55,40 @@ export const PlayerWrapper: React.FC<Props> = ({
 const PlayerContent = ({ presentationId }: Props) => {
 	const [skipThumbnail, setSkipThumbnail] = useState(false);
 
+	const {
+		data: coverInfo,
+		isLoading: coverInfoIsLoading,
+		isError: coverInfoIsError,
+	} = usePlayCoverInfo(presentationId);
+
+	const {
+		data: playerOptions,
+		isLoading: playerOptionsIsLoading,
+		isError: playerOptionsIsError,
+	} = usePlayerOptions(presentationId);
+
+	// Check if stream is started with GetLiveStatus
+
+	console.log(playerOptions);
+
+	if (coverInfoIsLoading || playerOptionsIsLoading) {
+		return <GridSpinner />;
+	}
+	if (coverInfoIsError || playerOptionsIsError) {
+		return <div>Error. Try reloading the page</div>;
+	}
+
 	if (!skipThumbnail) {
 		return (
 			<PlayerPreview
-				presentationId={presentationId}
+				coverInfo={playerOptions}
 				onClick={() => setSkipThumbnail(true)}
 			/>
 		);
 	} else {
 		return (
 			<Player
+				playerOptions={playerOptions}
 				presentationId={presentationId!}
 				className="w-full h-full flex justify-center items-center"
 			/>
@@ -70,23 +96,15 @@ const PlayerContent = ({ presentationId }: Props) => {
 	}
 };
 
-interface PlayePreviewProps {
-	presentationId: string;
+interface PlayerPreviewProps {
+	coverInfo: PlayerOptions;
 	onClick: (value: React.SetStateAction<boolean>) => void;
 }
-const PlayerPreview: React.FC<PlayePreviewProps> = ({
-	presentationId,
+
+const PlayerPreview: React.FC<PlayerPreviewProps> = ({
+	coverInfo,
 	onClick,
 }) => {
-	const {
-		data: coverInfo,
-		isLoading,
-		isError,
-	} = usePlayCoverInfo(presentationId);
-
-	if (isError) return <div>Error. Try reloading the page</div>;
-	if (isLoading) return <GridSpinner />;
-
 	return (
 		<div
 			className="flex items-center justify-center cursor-pointer w-full h-full"
@@ -94,12 +112,12 @@ const PlayerPreview: React.FC<PlayePreviewProps> = ({
 		>
 			<img
 				className="absolute w-full h-full top-0 left-0 object-cover opacity-0 transition-opacity duration-300"
-				src={`https://videocollege.tue.nl${coverInfo.ThumbnailUrl}`}
+				src={`https://videocollege.tue.nl${coverInfo.Presentation.ThumbnailUrl}`}
 				alt=""
-				onError={(e) => {
-					(e.target as HTMLImageElement).src =
-						"https://www.vanwijnen.nl/wp-content/uploads/2017/05/BvOF-2018_1213_BBT-gebouw-Atlas-HR-1500x1000.jpg";
-				}}
+				// onError={(e) => {
+				// 	(e.target as HTMLImageElement).src =
+				// 		"https://www.vanwijnen.nl/wp-content/uploads/2017/05/BvOF-2018_1213_BBT-gebouw-Atlas-HR-1500x1000.jpg";
+				// }}
 				onLoad={(e) => {
 					(e.target as HTMLImageElement).style.opacity = "1";
 				}}

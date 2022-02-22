@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { Stream, VideoURL } from "@/interfaces/PlayerOptions.interface";
+import {
+	PlayerOptions,
+	Stream,
+	VideoURL,
+} from "@/interfaces/PlayerOptions.interface";
 
 import { Video } from "./video";
 import { usePlayerOptions } from "../../utils/api";
@@ -10,21 +14,20 @@ import "./player.css";
 
 export interface PlayerProps extends React.HTMLAttributes<HTMLDivElement> {
 	presentationId: string;
+	playerOptions: PlayerOptions;
 }
 
-export const Player = ({ presentationId, ...props }: PlayerProps) => {
+export const Player = ({
+	presentationId,
+	playerOptions,
+	...props
+}: PlayerProps) => {
 	const primaryVideoRef = useRef<HTMLVideoElement>(null);
 	const secondaryVideoRef = useRef<HTMLVideoElement>(null);
 	const playerContainerRef = useRef<HTMLDivElement>(null);
 
 	const [direction, setDirection] = useState("");
 	const [switched, setSwitched] = useState(false);
-
-	const {
-		data: playerOptions,
-		isLoading,
-		// isError,
-	} = usePlayerOptions(presentationId);
 
 	const streams = useMemo(
 		() =>
@@ -62,8 +65,6 @@ export const Player = ({ presentationId, ...props }: PlayerProps) => {
 		window.addEventListener("resize", handler);
 		return () => window.removeEventListener("resize", handler);
 	}, []);
-
-	if (isLoading) return <GridSpinner />;
 
 	return (
 		<div {...props}>
