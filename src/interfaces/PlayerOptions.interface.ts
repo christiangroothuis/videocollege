@@ -1,3 +1,5 @@
+import { PlayStatus } from "./Presentations.interface";
+
 export interface PlayerOptions {
 	__type: string;
 	CoverageEvents: any[];
@@ -127,7 +129,7 @@ export interface Presentation {
 	HasSearchableText: boolean;
 	IsStandAlone: boolean;
 	DisableCaptionDisplay: boolean;
-	PlayStatus: string;
+	PlayStatus: PlayStatus;
 	AnonymousAllowed: boolean;
 	PresentationId: string;
 	Title: string;

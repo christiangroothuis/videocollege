@@ -166,6 +166,7 @@ export interface ExternalVideoData {
 export enum PlayStatus {
 	NotAvailable = "NotAvailable",
 	OnDemand = "OnDemand",
+	ScheduledForLive = "ScheduledForLive",
 }
 
 export enum Source {
@@ -175,8 +176,16 @@ export enum Source {
 }
 
 export enum Status {
+	Offline = "Offline",
 	Record = "Record",
 	Viewable = "Viewable",
+	Recorded = "Recorded",
+	ViewableOnDemand = "ViewableOnDemand",
+	OpenForRecord = "OpenForRecord",
+	Live = "Live",
+	Transcoding = "Transcoding",
+	Recording = "Recording",
+	Unavailable = "Unavailable",
 }
 
 export interface Stream {
