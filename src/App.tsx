@@ -1,10 +1,13 @@
 import React from "react";
-import "./index.css";
-import Home from "./pages/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Presentation } from "./pages/Presentation/Presentation";
 import { SWRConfig } from "swr";
-import Layout from "./components/Layout";
+
+import { Layout } from "./components/Layout";
+import { Home } from "./pages/Home";
+import { Presentation } from "./pages/Presentation/Presentation";
+import { Course } from "./pages/Course";
+
+import "./index.css";
 
 const App = () => {
 	return (
@@ -25,6 +28,7 @@ const App = () => {
 								path="presentation/:id"
 								element={<Presentation />}
 							/>
+							<Route path="course/:id" element={<Course />} />
 							{/* <Route path="player/:id" element={<Player />} /> */}
 						</Routes>
 					</Layout>

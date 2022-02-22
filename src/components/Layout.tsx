@@ -3,7 +3,11 @@ import Nav from "./nav/nav";
 
 import "./nav/nav.css";
 
-const Layout: React.FC = ({ children }: { children?: React.ReactNode }) => {
+export const Layout: React.FC = ({
+	children,
+}: {
+	children?: React.ReactNode;
+}) => {
 	return (
 		<div className="flex overflow-hidden relative w-full h-screen">
 			<Nav />
@@ -16,5 +20,3 @@ const Layout: React.FC = ({ children }: { children?: React.ReactNode }) => {
 		</div>
 	);
 };
-
-export default Layout;

@@ -25,6 +25,7 @@ const Nav = () => {
 						width="48"
 						height="48"
 					/> */}
+					{/* <Logo className="w-9/12 z-10" /> */}
 					<div className="absolute top-0 left-0 w-full h-full bg-white"></div>
 					<Logo className="w-9/12 z-10 text-red-700" />
 				</NavIcon>
@@ -43,9 +44,18 @@ const Nav = () => {
 
 				<Divider />
 
-				<ChannelIcon to="/3IC30" text={"3IC30 [2021-2022]"} />
-				<ChannelIcon to="/2IAB0" text={"2IAB0 [2021-2022]"} />
-				<ChannelIcon to="/2IL50" text={"2IL50 [2021-2022]"} />
+				<ChannelIcon
+					to="/course/80ee9f559585422fa33ab82c9c19355a14"
+					text={"3IC30 [2021-2022]"}
+				/>
+				<ChannelIcon
+					to="/course/2011669edf764e00ae385e61eb5b8a4e14"
+					text={"2IAB0 [2021-2022]"}
+				/>
+				<ChannelIcon
+					to="/course/0a19c5499aec4b4a98f5d4a538bf090214"
+					text={"2IL50 [2021-2022]"}
+				/>
 			</div>
 		</nav>
 	);
