@@ -4,7 +4,6 @@ A custom client for the TU Eindhoven [videocollege site](https://videocollege.tu
 
 This project is in no way associated with the TU Eindhoven or Mediasite.
 
-
 ## Development Setup
 
 To get started run:
@@ -13,7 +12,7 @@ To get started run:
 git clone https://github.com/christiangroothuis/videocollege.git
 cd videocollege
 
-yarn 
+yarn
 
 #or
 
@@ -26,17 +25,19 @@ Install the browser extension for Firefox for development in the browser-extensi
 
 Log into the [videocollege site](https://videocollege.tue.nl/Mediasite/Manage) to start a session, which the extension will inject into the requests of this client.
 
-The chromium extension is not yet fully functional.
+The chromium extension is not yet fully functional, since it doesn't support post request to the Mediasite API.
 
 Then run:
+
 ```bash
 yarn start
 ```
+
 This runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Useful documentation
 
-- [Apache Lucene](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
-- [Mediasite API](https://training.mediasite.com/Mediasite/api/v1/$metadata)
-
+-   [Apache Lucene](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+-   [Mediasite API](https://training.mediasite.com/Mediasite/api/v1/$metadata)
+-   [OData query syntax](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
