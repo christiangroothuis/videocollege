@@ -7,6 +7,7 @@ import { ReactComponent as Logo } from "../../assets/tue-logo/logo-old.svg";
 import { ReactComponent as Home } from "../../assets/icons/home.svg";
 import { ReactComponent as Clock } from "../../assets/icons/clock.svg";
 import { ReactComponent as Search } from "../../assets/icons/search.svg";
+import { ReactComponent as Github } from "../../assets/icons/github.svg";
 
 // import logoBg from "../../assets/images/christmas.jpg";
 
@@ -17,7 +18,7 @@ const Nav = () => {
 				style={{ overflow: "hidden scroll" }}
 				className="flex-auto h-screen pt-4"
 			>
-				<NavIcon to="/" isLogo>
+				<NavIcon to="/" noActive>
 					{/* <img
 						className="absolute top-0 left-0 w-full h-full object-cover"
 						src={logoBg}
@@ -56,6 +57,34 @@ const Nav = () => {
 					to="/course/0a19c5499aec4b4a98f5d4a538bf090214"
 					text={"2IL50 [2021-2022]"}
 				/>
+
+				<div className="bottom-0 fixed bg-bgsecondary pb-2">
+					<div className="nav-item-wrapper pb-2">
+						<div className="h-[0.125rem] w-20 bg-bgtertiary rounded" />
+					</div>
+					<a
+						className={`group nav-item-wrapper`}
+						href="https://github.com/christiangroothuis/videocollege/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div className="relative w-12 h-12 cursor-pointer">
+							<div
+								className={`bg-bgtertiary relative w-12 h-12
+                                transition-all duration-200 overflow-hidden
+                                group-hover:rounded-2xl rounded-3xl`}
+								style={{ transform: "translate3d(0, 0, 0)" }}
+							>
+								<div
+									className="absolute w-full h-full top-0 left-0 flex
+                                 justify-center items-center"
+								>
+									<Github className="w-5 text-white" />
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
 			</div>
 		</nav>
 	);
