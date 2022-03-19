@@ -1,5 +1,6 @@
 import React from 'react';
 import HlsPlayer from 'react-hls-player';
+
 import { VideoURL } from '../../interfaces/PlayerOptions.interface';
 
 export const Video = React.memo(

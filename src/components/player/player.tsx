@@ -3,8 +3,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { PlayerOptions, Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
 
 import { Video } from './video';
-import { usePlayerOptions } from '../../utils/api';
-import { GridSpinner } from '../Spinner/spinner.js';
 
 import './player.css';
 
@@ -65,7 +63,8 @@ export function Player({ presentationId, playerOptions, className }: PlayerProps
             >
                 <Video streams={streams} primaryVideoRef={primaryVideoRef} secondaryVideoRef={secondaryVideoRef} />
                 <span
-                    className="top-0 right-0 absolute font-medium p-2 select-none cursor-pointer bg-white text-bgtertiary rounded-lg m-3 shadow-md"
+                    className="top-0 right-0 absolute font-medium p-2 select-none cursor-pointer
+                             bg-white text-bgtertiary rounded-lg m-3 shadow-md"
                     onClick={() => setSwitched(!switched)}
                 >
                     Switch
