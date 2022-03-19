@@ -1,19 +1,15 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
-	isWide?: boolean;
+    isWide?: boolean;
 }
 
-const Divider = ({ isWide = false }: Props) => {
-	return (
-		<div className={`nav-item-wrapper py-2`}>
-			<div
-				className={`h-[0.125rem] ${
-					isWide ? "w-20" : "w-8"
-				} bg-bgtertiary rounded`}
-			></div>
-		</div>
-	);
-};
+function Divider({ isWide = false }: Props) {
+    return (
+        <div className="nav-item-wrapper py-2">
+            <div className={`h-[0.125rem] ${isWide ? 'w-20' : 'w-8'} bg-bgtertiary rounded`} />
+        </div>
+    );
+}
 
 export default Divider;

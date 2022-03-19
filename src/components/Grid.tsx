@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
-export const Grid = () => {
-	return <div></div>;
-};
+export function Grid() {
+    return <div />;
+}

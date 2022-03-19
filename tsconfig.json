@@ -6,7 +6,6 @@
             "dom.iterable",
             "esnext"
         ],
-        "allowJs": true,
         "noImplicitAny": true,
         "esModuleInterop": true,
         "strict": true,
