@@ -1,15 +1,14 @@
-import React from "react";
+import React from 'react';
 
-export const ProxiedImage = ({
-	...props
-}: React.ImgHTMLAttributes<HTMLImageElement>) => {
-	const proxyUrl = process.env.REACT_APP_API_URL;
+export function ProxiedImage({ alt = '', ...props }: React.ImgHTMLAttributes<HTMLImageElement>) {
+    const proxyUrl = process.env.REACT_APP_API_URL;
 
-	if (proxyUrl) {
-		props.src = props.src?.replace(
-			/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}/,
-			proxyUrl
-		);
-	}
-	return <img {...props} />;
-};
+    let { src } = props;
+
+    if (proxyUrl) {
+        src = src?.replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}/, proxyUrl);
+    }
+
+    /* eslint-disable react/jsx-props-no-spreading */
+    return <img alt={alt} src={src} {...props} />;
+}
