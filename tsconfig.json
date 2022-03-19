@@ -18,19 +18,19 @@
             "@/*": [
                 "*"
             ],
-            "@components": [
+            "@components/*": [
                 "components/*"
             ],
-            "@utils": [
+            "@utils/*": [
                 "utils/*"
             ],
-            "@pages": [
+            "@pages/*": [
                 "pages/*"
             ],
-            "@interfaces": [
+            "@interfaces/*": [
                 "interfaces/*"
             ],
-            "@assets": [
+            "@assets/*": [
                 "assets/*"
             ]
         }
