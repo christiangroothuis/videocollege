@@ -1,3 +1,5 @@
+import React from "react";
+
 export const ProxiedImage = ({
 	...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
