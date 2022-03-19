@@ -1,8 +1,9 @@
+import React from "react";
 import { Value } from "@/interfaces/Presentations.interface";
+import { dateToString } from "../utils/dateToString";
 import { useParams } from "react-router-dom";
 import PresentationPreview from "../components/PresentationThumbnail";
 import { usePresentationSearch } from "../utils/api";
-import { dateToString } from "../utils/dateToString";
 
 export const Course = () => {
 	const { id: folderId } = useParams();

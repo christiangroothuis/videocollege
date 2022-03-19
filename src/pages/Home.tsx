@@ -1,3 +1,4 @@
+import React from "react";
 import PresentationPreview from "../components/PresentationThumbnail";
 import { Value } from "@/interfaces/Presentations.interface";
 import { usePresentationSearch } from "../utils/api";
