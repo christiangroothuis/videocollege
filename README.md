@@ -40,4 +40,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 -   [Apache Lucene](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
 -   [Mediasite API](https://training.mediasite.com/Mediasite/api/v1/$metadata)
--   [OData query syntax](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+-   [OData query syntax](https://www.odata.org/documentation/odata-version-3-0/url-conventions)
