@@ -13,8 +13,8 @@ import logoBg from '../../assets/images/christmas.jpg';
 
 function Nav() {
     return (
-        <nav className="flex shrink-0 w-20 min-h-screen bg-bgsecondary fixed top-0">
-            <div style={{ overflow: 'hidden scroll' }} className="flex-auto h-screen pt-4">
+        <nav className="fixed top-0 flex min-h-screen w-20 shrink-0 bg-bgsecondary">
+            <div style={{ overflow: 'hidden scroll' }} className="h-screen flex-auto pt-4">
                 <div className="pb-24">
                     <NavIcon to="/" noActive>
                         {/* <img
@@ -25,8 +25,8 @@ function Nav() {
 						height="48"
 					/> */}
                         {/* <Logo className="w-9/12 z-10" /> */}
-                        <div className="absolute top-0 left-0 w-full h-full bg-white" />
-                        <Logo className="w-9/12 z-10 text-red-700" />
+                        <div className="absolute top-0 left-0 h-full w-full bg-white" />
+                        <Logo className="z-10 w-9/12 text-red-700" />
                     </NavIcon>
 
                     <Divider isWide />
@@ -47,26 +47,26 @@ function Nav() {
                     <ChannelIcon to="/course/2011669edf764e00ae385e61eb5b8a4e14" text="2IAB0 [2021-2022]" />
                     <ChannelIcon to="/course/0a19c5499aec4b4a98f5d4a538bf090214" text="2IL50 [2021-2022]" />
                 </div>
-                <div className="bottom-0 fixed bg-bgsecondary pb-2">
+                <div className="fixed bottom-0 bg-bgsecondary pb-2">
                     <div className="nav-item-wrapper pb-2">
-                        <div className="h-[0.125rem] w-20 bg-bgtertiary rounded" />
+                        <div className="h-[0.125rem] w-20 rounded bg-bgtertiary" />
                     </div>
                     <a
-                        className="group nav-item-wrapper"
+                        className="nav-item-wrapper group"
                         href="https://github.com/christiangroothuis/videocollege/"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <div className="relative w-12 h-12 cursor-pointer">
+                        <div className="relative h-12 w-12 cursor-pointer">
                             <div
-                                className={`bg-bgtertiary relative w-12 h-12
-                                transition-all duration-200 overflow-hidden
-                                group-hover:rounded-2xl rounded-3xl`}
+                                className={`relative h-12 w-12 overflow-hidden
+                                rounded-3xl bg-bgtertiary transition-all
+                                duration-200 group-hover:rounded-2xl`}
                                 style={{ transform: 'translate3d(0, 0, 0)' }}
                             >
                                 <div
-                                    className="absolute w-full h-full top-0 left-0 flex
-                                 justify-center items-center"
+                                    className="absolute top-0 left-0 flex h-full w-full
+                                 items-center justify-center"
                                 >
                                     <Github className="w-5 text-white" />
                                 </div>

@@ -16,10 +16,10 @@ interface PlayerPreviewProps {
 
 function PlayerPreview({ thumbnailUrl, onClick }: PlayerPreviewProps) {
     return (
-        <div className="flex items-center justify-center cursor-pointer w-full h-full" onClick={() => onClick(true)}>
+        <div className="flex h-full w-full cursor-pointer items-center justify-center" onClick={() => onClick(true)}>
             {thumbnailUrl && (
                 <img
-                    className="absolute w-full h-full top-0 left-0 object-cover opacity-0 transition-opacity duration-300"
+                    className="absolute top-0 left-0 h-full w-full object-cover opacity-0 transition-opacity duration-300"
                     src={`https://videocollege.tue.nl${thumbnailUrl}`}
                     alt=""
                     onLoad={(e) => {
@@ -27,8 +27,8 @@ function PlayerPreview({ thumbnailUrl, onClick }: PlayerPreviewProps) {
                     }}
                 />
             )}
-            <div className="relative bg-white rounded-full p-6 shadow-xl">
-                <PlayIcon className="w-10 h-10 ml-1 text-bgtertiary" />
+            <div className="relative rounded-full bg-white p-6 shadow-xl">
+                <PlayIcon className="ml-1 h-10 w-10 text-bgtertiary" />
             </div>
         </div>
     );
@@ -73,7 +73,7 @@ function PlayerContent({ presentationId }: Props) {
         <Player
             playerOptions={playerOptions}
             presentationId={presentationId!}
-            className="w-full h-full flex justify-center items-center"
+            className="flex h-full w-full items-center justify-center"
         />
     );
 }
@@ -86,7 +86,7 @@ function ErrorFallback({
     resetErrorBoundary: (...args: Array<unknown>) => void;
 }) {
     return (
-        <div role="alert" className="flex flex-col h-full justify-center items-center bg-black">
+        <div role="alert" className="flex h-full flex-col items-center justify-center bg-black">
             <p>Something went wrong:</p>
             <pre>{error.message}</pre>
             <button className="underline" onClick={resetErrorBoundary} type="button">
@@ -104,7 +104,7 @@ export function PlayerWrapper({ presentationId }: Props) {
                 // reset the state of your app so the error doesn't happen again
             }}
         >
-            <div className="w-full h-full absolute top-0 left-0 flex justify-center items-center">
+            <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
                 <PlayerContent presentationId={presentationId} />
             </div>
         </ErrorBoundary>

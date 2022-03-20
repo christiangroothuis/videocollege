@@ -27,7 +27,7 @@ export function Thumbnail({
     return (
         <Link to={`/presentation/${id}`}>
             <div
-                className="mb-2 aspect-video rounded overflow-hidden relative bg-slate-600 blue-gradient"
+                className="blue-gradient relative mb-2 aspect-video overflow-hidden rounded bg-slate-600"
                 style={{ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }}
             >
                 {image ? (
@@ -36,29 +36,29 @@ export function Thumbnail({
                             (e.target as HTMLImageElement).style.display = 'none';
                         }}
                         src={image}
-                        className="w-full h-full object-cover"
+                        className="h-full w-full object-cover"
                         alt=""
                     />
                 ) : (
-                    <div className="w-full h-full flex justify-center items-center">
-                        <Broadcast className="opacity-25 text-black w-18 h-18" />
+                    <div className="flex h-full w-full items-center justify-center">
+                        <Broadcast className="h-18 w-18 text-black opacity-25" />
                     </div>
                 )}
-                <div className="absolute right-0 bottom-0 tabular-nums bg-black bg-opacity-70 font-medium text-xs px-1 rounded-sm m-1">
+                <div className="absolute right-0 bottom-0 m-1 rounded-sm bg-black bg-opacity-70 px-1 text-xs font-medium tabular-nums">
                     {HHmmss}
                 </div>
             </div>
             <div className="flex justify-between">
                 <div className="flex flex-col">
-                    <h2 className="font-bold text-[0.9375rem] line-clamp-1 mb-1">{title}</h2>
+                    <h2 className="mb-1 text-[0.9375rem] font-bold line-clamp-1">{title}</h2>
                     <span className="text-[0.8125rem] font-medium leading-tight text-tertiary">
                         {dateToText(recordDate)}
                     </span>
                 </div>
                 {isLive && (
-                    <span className="flex h-2.5 w-2.5 relative m-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
+                    <span className="relative m-3 flex h-2.5 w-2.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
                     </span>
                 )}
             </div>

@@ -16,7 +16,7 @@ export const Video = React.memo(
         return (
             <>
                 {streams.map(({ Location }: VideoURL, i: number) => (
-                    <div className="video rounded-lg overflow-hidden" key={Location}>
+                    <div className="video overflow-hidden rounded-lg" key={Location}>
                         <HlsPlayer
                             src={Location}
                             autoPlay

@@ -31,18 +31,18 @@ export function SmallThumbnail({
 
     return (
         <Link to={to}>
-            <div className={`h-18 ${active ? 'bg-bgtertiary' : 'bg-bgsecondary'} p-2.5 rounded-xl flex items-center`}>
+            <div className={`h-18 ${active ? 'bg-bgtertiary' : 'bg-bgsecondary'} flex items-center rounded-xl p-2.5`}>
                 <div
-                    className="aspect-square h-full blue-gradient rounded-md mr-3 flex justify-center items-center"
+                    className="blue-gradient mr-3 flex aspect-square h-full items-center justify-center rounded-md"
                     style={{ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }}
                 >
-                    <Broadcast className="opacity-25 text-black w-8 h-8" />
+                    <Broadcast className="h-8 w-8 text-black opacity-25" />
                 </div>
                 <div className="grow">
                     <div className="font-semibold line-clamp-1">{title}</div>
-                    <div className="text-tertiary text-md text-sm">{dateToText(recordDate)}</div>
+                    <div className="text-md text-sm text-tertiary">{dateToText(recordDate)}</div>
                 </div>
-                <div className="text-tertiary font-medium text-sm">{HHmmss}</div>
+                <div className="text-sm font-medium text-tertiary">{HHmmss}</div>
             </div>
         </Link>
     );
