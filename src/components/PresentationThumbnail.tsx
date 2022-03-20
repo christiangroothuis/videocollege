@@ -1,33 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { dateToText } from '../utils/dateToString';
 import { msToHHmmss } from '../utils/msToHHmmss';
-import { ProxiedImage } from './ProxiedImage';
 
 function PresentationPreview({
     id,
     title,
-    presenter,
     recordDate,
-    image,
     duration,
-    course,
+    image,
+    isLive,
 }: {
     id: string;
     title: string;
-    presenter: string;
     recordDate: Date;
-    image?: string;
     duration: number;
-    course: string;
+    image?: string | null;
+    isLive?: boolean;
 }) {
     const HHmmss = msToHHmmss(duration);
 
     return (
         <Link to={`/presentation/${id}`}>
-            <div className="mb-2 aspect-video shadow-2xl rounded overflow-hidden relative blue-gradient">
+            <div className="mb-2 aspect-video rounded overflow-hidden relative blue-gradient">
                 {image && (
-                    <ProxiedImage
+                    <img
                         onError={(e) => {
                             (e.target as HTMLImageElement).style.display = 'none';
                         }}
@@ -40,11 +38,14 @@ function PresentationPreview({
                     {HHmmss}
                 </div>
             </div>
-            <div className="flex flex-col">
-                <h2 className="font-bold text-[0.9375rem] line-clamp-1 mb-1">{title}</h2>
-                <span className="text-[0.8125rem] font-medium leading-tight text-tertiary">
-                    {dateToText(recordDate)}
-                </span>
+            <div className="flex justify-between">
+                <div className="flex flex-col">
+                    <h2 className="font-bold text-[0.9375rem] line-clamp-1 mb-1">{title}</h2>
+                    <span className="text-[0.8125rem] font-medium leading-tight text-tertiary">
+                        {dateToText(recordDate)}
+                    </span>
+                </div>
+                {isLive && <div className="rounded-full bg-red-500 h-2.5 w-2.5 m-2" />}
             </div>
         </Link>
     );
