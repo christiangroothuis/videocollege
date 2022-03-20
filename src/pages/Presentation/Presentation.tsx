@@ -19,7 +19,7 @@ function SmallThumbnail() {
     );
 }
 
-export function Presentation(): JSX.Element {
+export function Presentation() {
     const { id: presentationId } = useParams();
     const { data, isLoading, isError } = usePresentation(presentationId!);
 

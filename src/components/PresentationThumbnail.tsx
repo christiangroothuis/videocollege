@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { dateToText } from '../utils/dateToString';
 import { msToHHmmss } from '../utils/msToHHmmss';
+import { stringToColor } from '../utils/stringToColor';
 
 function PresentationPreview({
     id,
@@ -23,7 +24,10 @@ function PresentationPreview({
 
     return (
         <Link to={`/presentation/${id}`}>
-            <div className="mb-2 aspect-video rounded overflow-hidden relative blue-gradient">
+            <div
+                className="mb-2 aspect-video rounded overflow-hidden relative"
+                style={{ backgroundColor: stringToColor(id) }}
+            >
                 {image && (
                     <img
                         onError={(e) => {
