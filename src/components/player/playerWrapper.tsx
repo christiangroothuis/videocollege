@@ -10,25 +10,23 @@ import { PlayCoverInfo } from '../../interfaces/PlayCoverInfo.interface';
 import { PlayerOptions } from '../../interfaces/PlayerOptions.interface';
 
 interface PlayerPreviewProps {
-    coverInfo: PlayerOptions;
+    thumbnailUrl?: string;
     onClick: (value: React.SetStateAction<boolean>) => void;
 }
 
-function PlayerPreview({ coverInfo, onClick }: PlayerPreviewProps) {
+function PlayerPreview({ thumbnailUrl, onClick }: PlayerPreviewProps) {
     return (
         <div className="flex items-center justify-center cursor-pointer w-full h-full" onClick={() => onClick(true)}>
-            <img
-                className="absolute w-full h-full top-0 left-0 object-cover opacity-0 transition-opacity duration-300"
-                src={`https://videocollege.tue.nl${coverInfo.Presentation.ThumbnailUrl}`}
-                alt=""
-                // onError={(e) => {
-                // 	(e.target as HTMLImageElement).src =
-                // 		"https://www.vanwijnen.nl/wp-content/uploads/2017/05/BvOF-2018_1213_BBT-gebouw-Atlas-HR-1500x1000.jpg";
-                // }}
-                onLoad={(e) => {
-                    (e.target as HTMLImageElement).style.opacity = '1';
-                }}
-            />
+            {thumbnailUrl && (
+                <img
+                    className="absolute w-full h-full top-0 left-0 object-cover opacity-0 transition-opacity duration-300"
+                    src={`https://videocollege.tue.nl${thumbnailUrl}`}
+                    alt=""
+                    onLoad={(e) => {
+                        (e.target as HTMLImageElement).style.opacity = '1';
+                    }}
+                />
+            )}
             <div className="relative bg-white rounded-full p-6 shadow-xl">
                 <PlayIcon className="w-10 h-10 ml-1 text-bgtertiary" />
             </div>
@@ -55,7 +53,7 @@ function PlayerContent({ presentationId }: Props) {
         isError: playerOptionsIsError,
     } = usePlayerOptions(presentationId);
 
-    // Check if stream is started with GetLiveStatus
+    // TODO Check if stream is started with GetLiveStatus
     if (coverInfoIsLoading || playerOptionsIsLoading) {
         return <GridSpinner />;
     }
@@ -64,7 +62,12 @@ function PlayerContent({ presentationId }: Props) {
     }
 
     if (!skipThumbnail) {
-        return <PlayerPreview coverInfo={playerOptions} onClick={() => setSkipThumbnail(true)} />;
+        return (
+            <PlayerPreview
+                thumbnailUrl={playerOptions.Presentation.ThumbnailUrl}
+                onClick={() => setSkipThumbnail(true)}
+            />
+        );
     }
     return (
         <Player
