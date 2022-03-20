@@ -12,14 +12,10 @@ To get started run:
 git clone https://github.com/christiangroothuis/videocollege.git
 cd videocollege
 
-yarn
-
-#or
-
 yarn install
 ```
 
-Copy the .env.example file to for example .env.local and fill in the REACT_APP_SFAPIKEY which can be found in the API request headers in the [videocollege site](https://videocollege.tue.nl).
+Copy the .env.example file to .env.local and fill in the REACT_APP_SFAPIKEY which can be found in the API request headers in the [videocollege site](https://videocollege.tue.nl).
 
 Install the browser extension for Firefox for development in the browser-extension directory using [these instructions](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
 
