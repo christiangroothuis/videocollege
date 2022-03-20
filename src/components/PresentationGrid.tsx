@@ -43,8 +43,6 @@ export function PresentationGrid({ title, isLoading, rows = 4, presentations }: 
         visiblePresentations = presentations?.slice(0, limit);
     }
 
-    console.log(limit);
-
     return (
         <div className="mb-8">
             {title && <h1 className="font-bold text-2xl mb-4 line-clamp-1">{title}</h1>}
@@ -55,7 +53,8 @@ export function PresentationGrid({ title, isLoading, rows = 4, presentations }: 
                 ref={innerSectionRef}
             >
                 {isLoading
-                    ? [...Array(limit)].map((i) => <PresentationSkeleton key={i} />)
+                    ? /* eslint-disable react/no-array-index-key */
+                      [...Array(limit)].map((_, i) => <PresentationSkeleton key={i} />)
                     : visiblePresentations?.map(({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl }: Value) => (
                           <PresentationPreview
                               key={Id}

@@ -55,9 +55,6 @@ function PlayerContent({ presentationId }: Props) {
     } = usePlayerOptions(presentationId);
 
     // Check if stream is started with GetLiveStatus
-
-    console.log(playerOptions);
-
     if (coverInfoIsLoading || playerOptionsIsLoading) {
         return <GridSpinner />;
     }

@@ -9,7 +9,7 @@ import { Course } from './pages/Course';
 
 import './index.css';
 
-function App(): JSX.Element {
+function App() {
     return (
         <React.StrictMode>
             <SWRConfig
