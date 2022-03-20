@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { ReactComponent as Broadcast } from '../assets/icons/wifi.svg';
+
 import { dateToText } from '../utils/dateToString';
 import { msToHHmmss } from '../utils/msToHHmmss';
 import { stringToColor } from '../utils/stringToColor';
@@ -28,7 +30,7 @@ function PresentationPreview({
                 className="mb-2 aspect-video rounded overflow-hidden relative"
                 style={{ backgroundColor: stringToColor(id) }}
             >
-                {image && (
+                {image ? (
                     <img
                         onError={(e) => {
                             (e.target as HTMLImageElement).style.display = 'none';
@@ -37,6 +39,10 @@ function PresentationPreview({
                         className="w-full h-full object-cover"
                         alt=""
                     />
+                ) : (
+                    <div className="w-full h-full flex justify-center items-center">
+                        <Broadcast className="opacity-25 text-black w-18 h-18" />
+                    </div>
                 )}
                 <div className="absolute right-0 bottom-0 bg-black bg-opacity-70 font-medium text-xs px-1 rounded-sm m-2">
                     {HHmmss}
