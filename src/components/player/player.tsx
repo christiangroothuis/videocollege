@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { PlayerOptions, Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
 
@@ -28,8 +28,8 @@ export function Player({ presentationId, playerOptions, className }: PlayerProps
         [playerOptions]
     );
 
-    useEffect(() => {
-        const handler = () => {
+    useLayoutEffect(() => {
+        const handleWindowResize = () => {
             if (playerContainerRef?.current?.clientHeight) {
                 const aspectRatio = playerContainerRef.current.clientWidth / playerContainerRef.current.clientHeight;
 
@@ -47,10 +47,10 @@ export function Player({ presentationId, playerOptions, className }: PlayerProps
             }
         };
 
-        handler();
+        handleWindowResize();
 
-        window.addEventListener('resize', handler);
-        return () => window.removeEventListener('resize', handler);
+        window.addEventListener('resize', handleWindowResize);
+        return () => window.removeEventListener('resize', handleWindowResize);
     }, []);
 
     return (
