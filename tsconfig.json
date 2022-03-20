@@ -12,6 +12,7 @@
         "module": "esnext",
         "strictNullChecks": true,
         "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
         "jsx": "react",
         "baseUrl": "src",
         "paths": {
