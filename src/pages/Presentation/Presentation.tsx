@@ -1,27 +1,32 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { dateToText } from '../../utils/dateToString';
-import { usePresentation } from '../../utils/api';
+
+import { dateToString, dateToText } from '../../helpers/dateToString';
+import { usePresentation, usePresentationSearch } from '../../service/api';
 import { PlayerWrapper } from '../../components/player/playerWrapper';
+import SmallThumbnail from '../../components/SmallThumbnail';
 
 import './presentation.css';
-
-function SmallThumbnail() {
-    return (
-        <div className="h-18 bg-bgsecondary p-2.5 rounded-xl flex items-center">
-            <div className="aspect-square h-full blue-gradient rounded-md mr-3" />
-            <div className="grow">
-                <div className="font-semibold line-clamp-1">2IAB0 [2022-02-07 - 17:30]</div>
-                <div className="text-tertiary text-md text-sm">2/7/2022 17:30</div>
-            </div>
-            <div className="text-tertiary font-medium text-sm">45:19</div>
-        </div>
-    );
-}
+import Thumbnail from '../../components/Thumbnail';
+import { Value } from '../../interfaces/Presentations.interface';
 
 export function Presentation() {
     const { id: presentationId } = useParams();
     const { data, isLoading, isError } = usePresentation(presentationId!);
+
+    const {
+        data: upcoming,
+        isLoading: isLoadingUpcomingLectures,
+        // isError,
+    } = usePresentationSearch({
+        query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation  AirDateTimeUtc:[${dateToString(
+            new Date()
+        )} TO ${dateToString(
+            new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+        )}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
+        orderBy: 'RecordDate asc',
+        amountPerPage: 24,
+    });
 
     if (isError) {
         return <div>Error. Try reloading the page</div>;
@@ -61,10 +66,18 @@ export function Presentation() {
             <div>
                 <h1 className="font-bold text-xl py-3">Upcoming lectures</h1>
                 <div className="grid grid-cols-1 gap-2">
-                    <SmallThumbnail />
-                    <SmallThumbnail />
-                    <SmallThumbnail />
-                    <SmallThumbnail />
+                    {upcoming?.value
+                        .slice(0, 5)
+                        .map(({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl }: Value) => (
+                            <SmallThumbnail
+                                key={Id}
+                                id={Id}
+                                title={Title}
+                                recordDate={RecordDateLocal}
+                                duration={Duration}
+                                image={ThumbnailUrl}
+                            />
+                        ))}
                 </div>
             </div>
         </div>

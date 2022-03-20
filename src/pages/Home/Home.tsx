@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { PresentationGrid } from '../components/PresentationGrid';
-import { usePresentationSearch } from '../utils/api';
-import { dateToString } from '../utils/dateToString';
+import Grid from '../../components/Grid';
+import { usePresentationSearch } from '../../service/api';
+import { dateToString } from '../../helpers/dateToString';
 
 export function Home() {
     const {
@@ -29,13 +29,13 @@ export function Home() {
 
     return (
         <>
-            <PresentationGrid
+            <Grid
                 title="Upcoming lectures"
                 isLoading={isLoadingUpcomingLectures}
                 rows={2}
                 presentations={data?.value}
             />
-            <PresentationGrid title="Last lectures" isLoading={isLoadingLastLectures} presentations={data2?.value} />
+            <Grid title="Last lectures" isLoading={isLoadingLastLectures} presentations={data2?.value} />
         </>
     );
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { dateToString } from '../utils/dateToString';
-import { usePresentationSearch } from '../utils/api';
-import { PresentationGrid } from '../components/PresentationGrid';
+import { dateToString } from '../../helpers/dateToString';
+import { usePresentationSearch } from '../../service/api';
+
+import Grid from '../../components/Grid';
 
 export function Course() {
     const { id: folderId } = useParams();
@@ -33,13 +34,13 @@ export function Course() {
 
     return (
         <>
-            <PresentationGrid
+            <Grid
                 title="Upcoming lectures"
                 isLoading={isLoadingUpcomingLectures}
                 rows={2}
                 presentations={data?.value}
             />
-            <PresentationGrid title="Last lectures" isLoading={isLoadingLastLectures} presentations={data2?.value} />
+            <Grid title="Last lectures" isLoading={isLoadingLastLectures} presentations={data2?.value} />
         </>
     );
 }
