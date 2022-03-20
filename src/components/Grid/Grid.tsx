@@ -2,8 +2,8 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import { Value } from '@/interfaces/Presentations.interface';
 
-import PresentationPreview from './PresentationThumbnail';
-import { PresentationSkeleton } from './PresentationSkeleton';
+import Thumbnail from '../Thumbnail';
+import ThumbnailSkeleton from '../ThumbnailSkeleton';
 
 interface Props {
     title?: string;
@@ -12,7 +12,7 @@ interface Props {
     presentations: Value[];
 }
 
-export function PresentationGrid({ title, isLoading, rows = 4, presentations }: Props) {
+export function Grid({ title, isLoading, rows = 4, presentations }: Props) {
     const innerSectionRef = useRef<HTMLDivElement>(null);
     const [limit, setLimit] = useState(0);
 
@@ -54,9 +54,9 @@ export function PresentationGrid({ title, isLoading, rows = 4, presentations }: 
             >
                 {isLoading
                     ? /* eslint-disable react/no-array-index-key */
-                      [...Array(limit)].map((_, i) => <PresentationSkeleton key={i} />)
+                      [...Array(limit)].map((_, i) => <ThumbnailSkeleton key={i} />)
                     : visiblePresentations?.map(({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl }: Value) => (
-                          <PresentationPreview
+                          <Thumbnail
                               key={Id}
                               id={Id}
                               title={Title}

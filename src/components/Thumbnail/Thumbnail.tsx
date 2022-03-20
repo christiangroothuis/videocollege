@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as Broadcast } from '../assets/icons/wifi.svg';
+import { ReactComponent as Broadcast } from '../../assets/icons/wifi.svg';
 
-import { dateToText } from '../utils/dateToString';
-import { msToHHmmss } from '../utils/msToHHmmss';
-import { stringToColor } from '../utils/stringToColor';
+import { dateToText } from '../../helpers/dateToString';
+import { msToHHmmss } from '../../helpers/msToHHmmss';
+import { stringToColor } from '../../helpers/stringToColor';
 
-function PresentationPreview({
+export function Thumbnail({
     id,
     title,
     recordDate,
@@ -27,8 +27,8 @@ function PresentationPreview({
     return (
         <Link to={`/presentation/${id}`}>
             <div
-                className="mb-2 aspect-video rounded overflow-hidden relative"
-                style={{ backgroundColor: stringToColor(id) }}
+                className="mb-2 aspect-video rounded overflow-hidden relative bg-slate-600 blue-gradient"
+                style={{ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }}
             >
                 {image ? (
                     <img
@@ -44,7 +44,7 @@ function PresentationPreview({
                         <Broadcast className="opacity-25 text-black w-18 h-18" />
                     </div>
                 )}
-                <div className="absolute right-0 bottom-0 bg-black bg-opacity-70 font-medium text-xs px-1 rounded-sm m-2">
+                <div className="absolute right-0 bottom-0 tabular-nums bg-black bg-opacity-70 font-medium text-xs px-1 rounded-sm m-1">
                     {HHmmss}
                 </div>
             </div>
@@ -55,10 +55,13 @@ function PresentationPreview({
                         {dateToText(recordDate)}
                     </span>
                 </div>
-                {isLive && <div className="rounded-full bg-red-500 h-2.5 w-2.5 m-2" />}
+                {isLive && (
+                    <span className="flex h-2.5 w-2.5 relative m-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
+                    </span>
+                )}
             </div>
         </Link>
     );
 }
-
-export default PresentationPreview;

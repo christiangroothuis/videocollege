@@ -22,3 +22,22 @@ body {
 * {
     box-sizing: border-box;
 }
+
+.card {
+	background: linear-gradient(270deg, #909090, #ffffff, #909090);
+	background-size: 600% 600%;
+	opacity: 0.1;
+	animation: loading 1.5s ease infinite;
+}
+
+@keyframes loading {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
