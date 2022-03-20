@@ -13,7 +13,7 @@ import { ReactComponent as Github } from '../../assets/icons/github.svg';
 
 function Nav() {
     return (
-        <nav className="flex shrink-0 w-20 min-h-screen bg-bgsecondary">
+        <nav className="flex shrink-0 w-20 min-h-screen bg-bgsecondary fixed top-0">
             <div style={{ overflow: 'hidden scroll' }} className="flex-auto h-screen pt-4">
                 <div className="pb-24">
                     <NavIcon to="/" noActive>

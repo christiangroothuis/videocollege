@@ -5,11 +5,9 @@ import '../nav/nav.css';
 
 export function Layout({ children }: { children?: React.ReactNode }) {
     return (
-        <div className="flex overflow-hidden relative w-full h-screen">
+        <div className="flex w-full h-screen">
             <Nav />
-            <div style={{ overflow: 'hidden scroll' }} className="grow bg-bgprimary p-5">
-                {children}
-            </div>
+            <div className="ml-20 grow bg-bgprimary p-5">{children}</div>
         </div>
     );
 }

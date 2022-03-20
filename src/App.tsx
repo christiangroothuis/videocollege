@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
 import Layout from './components/Layout';
+import ScrollToTop from './components/ScrollToTop';
 
 import Home from './pages/Home';
 import Course from './pages/Course';
@@ -22,6 +23,7 @@ function App() {
             >
                 <Router>
                     <Layout>
+                        <ScrollToTop />
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="course/:id" element={<Course />} />
