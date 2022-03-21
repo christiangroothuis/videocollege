@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Value } from '@/interfaces/Presentations.interface';
 
 import Thumbnail from '../Thumbnail';
-import ThumbnailSkeleton from '../ThumbnailSkeleton';
+import ThumbnailSkeleton from '../Thumbnail/ThumbnailSkeleton';
 
 interface Props {
     title?: string;
