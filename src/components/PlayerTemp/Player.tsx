@@ -1,8 +1,8 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { PlayerOptions, Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
 
-import { Video } from './video';
+import { Video } from './Video';
 
 import './player.css';
 

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { dateToString, dateToText } from '../../helpers/dateToString';
 import { usePresentation, usePresentationSearch } from '../../service/api';
-import { PlayerWrapper } from '../../components/Player/playerWrapper';
+import { PlayerWrapper } from '../../components/PlayerTemp/PlayerWrapper';
 import SmallThumbnail from '../../components/SmallThumbnail';
 
 import { Value } from '../../interfaces/Presentations.interface';
