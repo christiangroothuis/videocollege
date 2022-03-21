@@ -7,7 +7,7 @@ const videocollegeHelper = {
         browser.webRequest.onBeforeSendHeaders.addListener(
             videocollegeHelper.requestHandler,
             {
-                urls: ['http://localhost:3000/*', 'https://videocollege.tue.nl/*', 'https://videocollege.vercel.app/*'],
+                urls: ['http://localhost:3000/*', 'https://videocollege.tue.nl/*', 'https://vercel.app/*'],
             },
             ['blocking', 'requestHeaders']
         );
@@ -15,7 +15,7 @@ const videocollegeHelper = {
         browser.webRequest.onHeadersReceived.addListener(
             videocollegeHelper.responseHandler,
             {
-                urls: ['http://localhost:3000/*', 'https://videocollege.tue.nl/*', 'https://videocollege.vercel.app/*'],
+                urls: ['http://localhost:3000/*', 'https://videocollege.tue.nl/*', 'https://vercel.app/*'],
             },
             ['blocking', 'responseHeaders']
         );
@@ -42,8 +42,7 @@ const videocollegeHelper = {
 
         if (
             transaction.requestHeaders.host.value === 'videocollege.tue.nl' &&
-            (transaction.request.originUrl.includes('http://localhost:3000') ||
-                transaction.request.originUrl.includes('https://videocollege.vercel.app'))
+            !transaction.request.originUrl.includes('https://videocollege.tue.nl')
         ) {
             const { name, value } = await browser.cookies.get({
                 name: 'MediasiteAuth',
