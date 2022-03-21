@@ -55,7 +55,7 @@ export function Grid({ title, isLoading, rows, presentations }: Props) {
                     ? /* eslint-disable react/no-array-index-key */
                       [...Array(rows ? limit : 12)].map((_, i) => <ThumbnailSkeleton key={i} />)
                     : visiblePresentations?.map(
-                          ({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl, Status }: Value) => (
+                          ({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl, Status, PlayStatus }: Value) => (
                               <Thumbnail
                                   key={Id}
                                   id={Id}
@@ -63,7 +63,8 @@ export function Grid({ title, isLoading, rows, presentations }: Props) {
                                   recordDate={RecordDateLocal}
                                   duration={Duration}
                                   image={ThumbnailUrl}
-                                  isLive={Status === 'Live'}
+                                  status={Status}
+                                  playStatus={PlayStatus}
                               />
                           )
                       )}

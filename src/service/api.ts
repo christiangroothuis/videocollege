@@ -142,7 +142,7 @@ export const usePresentationSearch = ({
     page = 1,
     amountPerPage = 24,
     orderBy = 'RecordDate desc',
-    select = 'card',
+    select = 'full',
     config,
 }: SearchParams): {
     data: Presentations;
