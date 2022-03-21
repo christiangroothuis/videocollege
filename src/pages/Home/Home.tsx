@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Grid from '../../components/Grid';
+
 import { usePresentationSearch } from '../../service/api';
 import { dateToString } from '../../helpers/dateToString';
 
@@ -16,7 +17,7 @@ export function Home() {
             new Date(new Date().setFullYear(new Date().getFullYear() + 1))
         )}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
         orderBy: 'RecordDate asc',
-        amountPerPage: 24,
+        amountPerPage: 12,
     });
     const { data: data2, isLoading: isLoadingLastLectures } = usePresentationSearch({
         query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation AirDateTimeUtc:[${dateToString(
@@ -24,7 +25,7 @@ export function Home() {
         )} TO ${dateToString(
             new Date()
         )}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
-        amountPerPage: 24,
+        amountPerPage: 12,
     });
 
     return (

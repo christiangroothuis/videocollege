@@ -1,8 +1,8 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { PlayerOptions, Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
 
-import { Video } from './video';
+import { Video } from './Video';
 
 import './player.css';
 
@@ -56,15 +56,15 @@ export function Player({ presentationId, playerOptions, className }: PlayerProps
     return (
         <div className={className}>
             <div
-                className={`player-container w-full h-full ${direction} ${
+                className={`player-container h-full w-full ${direction} ${
                     streams?.length > 1 && switched ? 'switched' : ''
                 } ${streams?.length > 1 ? 'two-streams' : ''}`}
                 ref={playerContainerRef}
             >
                 <Video streams={streams} primaryVideoRef={primaryVideoRef} secondaryVideoRef={secondaryVideoRef} />
                 <span
-                    className="top-0 right-0 absolute font-medium p-2 select-none cursor-pointer
-                             bg-white text-bgtertiary rounded-lg m-3 shadow-md"
+                    className="absolute top-0 right-0 m-3 cursor-pointer select-none rounded-lg
+                             bg-white p-2 font-medium text-bgtertiary shadow-md"
                     onClick={() => setSwitched(!switched)}
                 >
                     Switch

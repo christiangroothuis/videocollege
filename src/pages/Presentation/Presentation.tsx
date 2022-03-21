@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 
 import { dateToString, dateToText } from '../../helpers/dateToString';
 import { usePresentation, usePresentationSearch } from '../../service/api';
-import { PlayerWrapper } from '../../components/player/playerWrapper';
+import { PlayerWrapper } from '../../components/Player/PlayerWrapper';
 import SmallThumbnail from '../../components/SmallThumbnail';
 
-import './presentation.css';
-import Thumbnail from '../../components/Thumbnail';
 import { Value } from '../../interfaces/Presentations.interface';
+
+import './presentation.css';
 
 export function Presentation() {
     const { id: presentationId } = useParams();
@@ -39,8 +39,8 @@ export function Presentation() {
 
         description = (
             <div>
-                <span className="font-bold text-2xl mb-2">{Title}</span>
-                <div className="text-secondary flex flex-col space-y-4">
+                <span className="mb-2 text-2xl font-bold">{Title}</span>
+                <div className="flex flex-col space-y-4 text-secondary">
                     <span>{NumberOfViews} Views</span>
                     <span>
                         Recorded on
@@ -55,16 +55,16 @@ export function Presentation() {
     return (
         <div className="grid gap-4 xl:grid-cols-[1fr_22rem]">
             <div className="overflow-hidden ">
-                <div className="w-full aspect-video min-h-[60vh] xl:h-[75vh] max-w-full rounded-2xl bg-black relative overflow-hidden">
+                <div className="relative aspect-video min-h-[60vh] w-full max-w-full overflow-hidden rounded-2xl bg-black xl:h-[75vh]">
                     <PlayerWrapper
                         // className="w-full h-full absolute left-0 top-0"
                         presentationId={presentationId!}
                     />
                 </div>
-                <div className="p-8 pt-7 min-h-[12rem] bg-bgsecondary mt-3 rounded-2xl">{description}</div>
+                <div className="mt-3 min-h-[12rem] rounded-2xl bg-bgsecondary p-8 pt-7">{description}</div>
             </div>
             <div>
-                <h1 className="font-bold text-xl py-3">Upcoming lectures</h1>
+                <h1 className="py-3 text-xl font-bold">Upcoming lectures</h1>
                 <div className="grid grid-cols-1 gap-2">
                     {upcoming?.value
                         .slice(0, 5)

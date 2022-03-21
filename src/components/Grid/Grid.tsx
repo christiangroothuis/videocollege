@@ -12,7 +12,7 @@ interface Props {
     presentations: Value[];
 }
 
-export function Grid({ title, isLoading, rows = 4, presentations }: Props) {
+export function Grid({ title, isLoading, rows, presentations }: Props) {
     const innerSectionRef = useRef<HTMLDivElement>(null);
     const [limit, setLimit] = useState(0);
 
@@ -45,16 +45,15 @@ export function Grid({ title, isLoading, rows = 4, presentations }: Props) {
 
     return (
         <div className="mb-8">
-            {title && <h1 className="font-bold text-2xl mb-4 line-clamp-1">{title}</h1>}
+            {title && <h1 className="mb-4 text-2xl font-bold line-clamp-1">{title}</h1>}
 
             <div
-                className="grid gap-4 gap-y-6
-                        grid-cols-[repeat(auto-fill,minmax(min(16rem,_100%),1fr))]"
+                className="grid grid-cols-[repeat(auto-fill,minmax(min(16rem,_100%),1fr))] gap-4 gap-y-6"
                 ref={innerSectionRef}
             >
                 {isLoading
                     ? /* eslint-disable react/no-array-index-key */
-                      [...Array(limit)].map((_, i) => <ThumbnailSkeleton key={i} />)
+                      [...Array(rows ? limit : 12)].map((_, i) => <ThumbnailSkeleton key={i} />)
                     : visiblePresentations?.map(({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl }: Value) => (
                           <Thumbnail
                               key={Id}
