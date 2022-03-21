@@ -30,6 +30,7 @@ export function Thumbnail({
     const isLive = playStatus === 'Live';
     const isRecorded = playStatus === 'OnDemand' && status === 'Viewable';
     const isTranscoding = status === 'Transcoding';
+    const isScheduled = playStatus === 'ScheduledForLive' && status === 'Record';
 
     return (
         <Link to={`/presentation/${id}`}>
@@ -40,7 +41,7 @@ export function Thumbnail({
                         onLoad={(e) => {
                             (e.target as HTMLImageElement).style.opacity = '1';
                         }}
-                        className="h-full w-full object-cover opacity-0"
+                        className="h-full w-full object-cover opacity-0 transition-opacity"
                         alt=""
                     />
                 ) : (
@@ -55,6 +56,7 @@ export function Thumbnail({
                     {isRecorded && msToHHmmss(duration)}
                     {isLive && 'Live'}
                     {isTranscoding && 'Transcoding...'}
+                    {isScheduled && 'Scheduled'}
                 </div>
             </div>
             <div className="flex justify-between">
