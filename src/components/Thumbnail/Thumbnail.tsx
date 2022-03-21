@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as Broadcast } from '../../assets/icons/wifi.svg';
+import { PlayStatus, Status } from '@/interfaces/Presentations.interface';
 
 import { insertBeforeExtension } from '../../helpers/insertBeforeExtension';
 import { dateToText } from '../../helpers/dateToString';
 import { msToHHmmss } from '../../helpers/msToHHmmss';
 import { stringToColor } from '../../helpers/stringToColor';
+
+import { ReactComponent as Broadcast } from '../../assets/icons/wifi.svg';
 
 export function Thumbnail({
     id,
@@ -14,36 +16,45 @@ export function Thumbnail({
     recordDate,
     duration,
     image,
-    isLive,
+    status,
+    playStatus,
 }: {
     id: string;
     title: string;
     recordDate: Date;
     duration: number;
     image?: string | null;
-    isLive?: boolean;
+    status?: Status;
+    playStatus?: PlayStatus;
 }) {
-    const HHmmss = msToHHmmss(duration);
+    const isLive = playStatus === 'Live';
+    const isRecorded = playStatus === 'OnDemand' && status === 'Viewable';
+    const isTranscoding = status === 'Transcoding';
 
     return (
         <Link to={`/presentation/${id}`}>
-            <div
-                className="blue-gradient relative mb-2 aspect-video overflow-hidden rounded bg-slate-600"
-                style={{ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }}
-            >
+            <div className="relative mb-2 aspect-video overflow-hidden rounded bg-slate-600">
                 {image ? (
                     <img
                         src={insertBeforeExtension(image, '_352_198_low')}
-                        className="h-full w-full object-cover"
+                        onLoad={(e) => {
+                            (e.target as HTMLImageElement).style.opacity = '1';
+                        }}
+                        className="h-full w-full object-cover opacity-0"
                         alt=""
                     />
                 ) : (
-                    <div className="flex h-full w-full items-center justify-center">
+                    <div
+                        className="flex h-full w-full items-center justify-center"
+                        style={{ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }}
+                    >
                         <Broadcast className="h-18 w-18 text-black opacity-25" />
                     </div>
                 )}
-                <div className="absolute right-0 bottom-0 m-1 rounded-sm bg-black bg-opacity-70 px-1 text-xs font-medium tabular-nums">
-                    {HHmmss}
+                <div className="absolute right-0 bottom-0 m-2 rounded-sm bg-black bg-opacity-70 px-1 text-xs font-medium tabular-nums">
+                    {isRecorded && msToHHmmss(duration)}
+                    {isLive && 'Live'}
+                    {isTranscoding && 'Transcoding...'}
                 </div>
             </div>
             <div className="flex justify-between">

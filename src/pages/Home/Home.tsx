@@ -24,7 +24,7 @@ export function Home() {
             new Date(new Date().setFullYear(new Date().getFullYear() - 1))
         )} TO ${dateToString(
             new Date()
-        )}] AND ((Status:Viewable AND PlayStatus:OnDemand) OR (Status:Live AND PlayStatus:Live)) AND IsApproved:True`,
+        )}] AND ((Status:Viewable AND PlayStatus:OnDemand) OR (Status:Live AND PlayStatus:Live) OR Status:Transcoding) AND IsApproved:True`,
         amountPerPage: 12,
     });
 
