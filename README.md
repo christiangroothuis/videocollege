@@ -19,8 +19,6 @@ Copy the .env.example file to .env.local and fill in the REACT_APP_SFAPIKEY whic
 
 Install the browser extension for Firefox for development in the browser-extension directory using [these instructions](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
 
-Log into the [videocollege site](https://videocollege.tue.nl/Mediasite/Manage) to start a session, which the extension will inject into the requests of this client.
-
 The chromium extension is not yet fully functional, since it doesn't support post requests to the Mediasite API.
 
 Then run:
