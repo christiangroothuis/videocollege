@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { usePlayCoverInfo, usePlayerOptions } from '../../service/api';
-import { Player } from './player';
+import { Player } from './Player';
 import GridSpinner from '../GridSpinner';
 
 import { ReactComponent as PlayIcon } from '../../assets/icons/play.svg';
-
-import { PlayCoverInfo } from '../../interfaces/PlayCoverInfo.interface';
-import { PlayerOptions } from '../../interfaces/PlayerOptions.interface';
 
 interface PlayerPreviewProps {
     thumbnailUrl?: string;

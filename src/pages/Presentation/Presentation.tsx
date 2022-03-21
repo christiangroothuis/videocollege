@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 
 import { dateToString, dateToText } from '../../helpers/dateToString';
 import { usePresentation, usePresentationSearch } from '../../service/api';
-import { PlayerWrapper } from '../../components/player/playerWrapper';
+import { PlayerWrapper } from '../../components/Player/playerWrapper';
 import SmallThumbnail from '../../components/SmallThumbnail';
 
-import './presentation.css';
-import Thumbnail from '../../components/Thumbnail';
 import { Value } from '../../interfaces/Presentations.interface';
+
+import './presentation.css';
 
 export function Presentation() {
     const { id: presentationId } = useParams();
