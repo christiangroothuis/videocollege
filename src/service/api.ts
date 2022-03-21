@@ -1,4 +1,4 @@
-import useSWR, { SWRConfiguration, Key, Fetcher } from 'swr';
+import useSWR, { SWRConfiguration } from 'swr';
 
 import { PlayerOptions } from '../interfaces/PlayerOptions.interface';
 import { Presentations, Value } from '../interfaces/Presentations.interface';
