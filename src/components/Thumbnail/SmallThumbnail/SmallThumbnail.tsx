@@ -34,6 +34,7 @@ export function SmallThumbnail({
             <div className={`h-18 ${active ? 'bg-bgtertiary' : 'bg-bgsecondary'} flex items-center rounded-xl p-2.5`}>
                 <div
                     className="blue-gradient mr-3 flex aspect-square h-full items-center justify-center rounded-md"
+                    // src={insertBeforeExtension(image, '_122_63_low')}
                     style={{ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }}
                 >
                     <Broadcast className="h-8 w-8 text-black opacity-25" />

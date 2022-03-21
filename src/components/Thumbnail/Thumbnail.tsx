@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as Broadcast } from '../../assets/icons/wifi.svg';
 
+import { insertBeforeExtension } from '../../helpers/insertBeforeExtension';
 import { dateToText } from '../../helpers/dateToString';
 import { msToHHmmss } from '../../helpers/msToHHmmss';
 import { stringToColor } from '../../helpers/stringToColor';
@@ -32,10 +33,7 @@ export function Thumbnail({
             >
                 {image ? (
                     <img
-                        onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                        }}
-                        src={image}
+                        src={insertBeforeExtension(image, '_352_198_low')}
                         className="h-full w-full object-cover"
                         alt=""
                     />
