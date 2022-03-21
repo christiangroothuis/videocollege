@@ -3,6 +3,7 @@ import useSWR, { SWRConfiguration, Key, Fetcher } from 'swr';
 import { PlayerOptions } from '../interfaces/PlayerOptions.interface';
 import { Presentations, Value } from '../interfaces/Presentations.interface';
 import { PlayCoverInfo } from '../interfaces/PlayCoverInfo.interface';
+import { Home } from '../interfaces/Home.interface';
 import { dateToString } from '../helpers/dateToString';
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -26,6 +27,29 @@ const fetcher = async (input: RequestInfo, init?: RequestInit) => {
     }
 
     return res.json();
+};
+
+export const useHome = (config?: SWRConfiguration): { data: Home; isLoading: boolean; isError: boolean } => {
+    const { data, error } = useSWR(
+        [
+            `${apiUrl}/Mediasite/api/v1/Home`,
+            {
+                headers: {
+                    'content-type': 'application/json; charset=UTF-8',
+                    sfapikey,
+                },
+                credentials: 'include',
+            },
+        ],
+        fetcher,
+        config
+    );
+
+    return {
+        data,
+        isLoading: !error && !data,
+        isError: error,
+    };
 };
 
 export const usePresentation = (id: string, select = 'full'): { data: Value; isLoading: boolean; isError: boolean } => {
