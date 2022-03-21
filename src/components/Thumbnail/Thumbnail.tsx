@@ -43,10 +43,13 @@ export function Thumbnail({
                         onLoad={(e) => {
                             (e.target as HTMLImageElement).style.opacity = '1';
                         }}
+                        onLoadStart={(e) => {
+                            (e.target as HTMLImageElement).style.opacity = '0';
+                        }}
                         onError={(e) => {
                             (e.target as HTMLImageElement).style.background = 'gray';
                         }}
-                        className="card h-full w-full object-cover opacity-0 transition-opacity"
+                        className="card h-full w-full object-cover transition-opacity"
                         alt=""
                     />
                 ) : (
