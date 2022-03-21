@@ -173,6 +173,51 @@ export const usePresentationSearch = ({
     };
 };
 
+const folderIdsToQuery = (...folderIds: string[]) =>
+    folderIds.map((folderId: string) => `ParentFolderId:${folderId}`).join(' OR ');
+
+export const useLastLectures = (
+    ...folderIds: string[]
+): {
+    data: Presentations;
+    isLoading: boolean;
+    isError: boolean;
+} => {
+    const string = folderIdsToQuery(...folderIds);
+
+    const lastYear = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+    const currentDate = new Date();
+
+    return usePresentationSearch({
+        query: `Type:Presentation AirDateTimeUtc:[${dateToString(lastYear)} TO ${dateToString(
+            currentDate
+        )}] AND ((Status:Viewable AND PlayStatus:OnDemand) OR (Status:Live AND PlayStatus:Live)) AND IsApproved:True ${
+            folderIds.length > 0 ? `AND ${string}` : ''
+        }`,
+    });
+};
+
+export const useNextLectures = (
+    ...folderIds: string[] | string[]
+): {
+    data: Presentations;
+    isLoading: boolean;
+    isError: boolean;
+} => {
+    const string = folderIds.map((folderId: string) => `ParentFolderId:${folderId}`).join(' OR ');
+
+    const nextYear = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+    const currentDate = new Date();
+
+    return usePresentationSearch({
+        query: `Type:Presentation AirDateTimeUtc:[${dateToString(currentDate)} TO ${dateToString(
+            nextYear
+        )}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True ${
+            folderIds.length > 0 ? `AND (${string})` : ''
+        }`,
+    });
+};
+
 export const useChannelSearch = ({
     query,
     page = 1,

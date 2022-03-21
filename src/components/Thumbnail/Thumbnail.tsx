@@ -44,7 +44,7 @@ export function Thumbnail({
                             (e.target as HTMLImageElement).style.opacity = '1';
                         }}
                         onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
+                            (e.target as HTMLImageElement).style.background = 'gray';
                         }}
                         className="card h-full w-full object-cover opacity-0 transition-opacity"
                         alt=""
