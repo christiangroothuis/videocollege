@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { dateToString, dateToText } from '../../helpers/dateToString';
-import { usePresentation, usePresentationSearch } from '../../service/api';
+import { dateToText } from '../../helpers/dateToString';
+import { useNextLectures, usePresentation } from '../../service/api';
 import { PlayerWrapper } from '../../components/Player/PlayerWrapper';
 import SmallThumbnail from '../../components/Thumbnail/SmallThumbnail';
 import SmallThumbnailSkeleton from '../../components/Thumbnail/SmallThumbnailSkeleton';
@@ -17,18 +17,10 @@ export function Presentation() {
     const { data, isLoading, isError } = usePresentation(presentationId!);
 
     const {
-        data: upcoming,
+        data: upcomingLectures,
         isLoading: isLoadingUpcomingLectures,
         // isError,
-    } = usePresentationSearch({
-        query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation  AirDateTimeUtc:[${dateToString(
-            new Date()
-        )} TO ${dateToString(
-            new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-        )}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
-        orderBy: 'RecordDate asc',
-        amountPerPage: 24,
-    });
+    } = useNextLectures();
 
     if (isError) {
         return <div>Error. Try reloading the page</div>;
@@ -72,8 +64,8 @@ export function Presentation() {
                 <h1 className="py-3 text-xl font-bold">Upcoming lectures</h1>
                 <div className="grid grid-cols-1 gap-2">
                     {!isLoadingUpcomingLectures
-                        ? upcoming?.value
-                              .slice(0, 5)
+                        ? upcomingLectures?.value
+                              .slice(0, 6)
                               .map(({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl }: Value) => (
                                   <SmallThumbnail
                                       key={Id}
@@ -84,7 +76,7 @@ export function Presentation() {
                                       image={ThumbnailUrl}
                                   />
                               ))
-                        : [...Array(5)].map((_, i) => (
+                        : [...Array(6)].map((_, i) => (
                               /* eslint-disable react/no-array-index-key */
                               <SmallThumbnailSkeleton key={i} />
                           ))}
