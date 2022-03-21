@@ -1,35 +1,11 @@
 import React, { useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+
 import { usePlayCoverInfo, usePlayerOptions } from '../../service/api';
+
 import { Player } from './Player';
 import GridSpinner from '../GridSpinner';
-
-import { ReactComponent as PlayIcon } from '../../assets/icons/play.svg';
-
-interface PlayerPreviewProps {
-    thumbnailUrl?: string;
-    onClick: (value: React.SetStateAction<boolean>) => void;
-}
-
-function PlayerPreview({ thumbnailUrl, onClick }: PlayerPreviewProps) {
-    return (
-        <div className="flex h-full w-full cursor-pointer items-center justify-center" onClick={() => onClick(true)}>
-            {thumbnailUrl && (
-                <img
-                    className="absolute top-0 left-0 h-full w-full object-cover opacity-0 transition-opacity duration-300"
-                    src={`https://videocollege.tue.nl${thumbnailUrl}`}
-                    alt=""
-                    onLoad={(e) => {
-                        (e.target as HTMLImageElement).style.opacity = '1';
-                    }}
-                />
-            )}
-            <div className="relative rounded-full bg-white p-6 shadow-xl">
-                <PlayIcon className="ml-1 h-10 w-10 text-bgtertiary" />
-            </div>
-        </div>
-    );
-}
+import Preview from './Preview';
 
 interface Props {
     presentationId: string;
@@ -60,10 +36,7 @@ function PlayerContent({ presentationId }: Props) {
 
     if (!skipThumbnail) {
         return (
-            <PlayerPreview
-                thumbnailUrl={playerOptions.Presentation.ThumbnailUrl}
-                onClick={() => setSkipThumbnail(true)}
-            />
+            <Preview thumbnailUrl={playerOptions.Presentation.ThumbnailUrl} onClick={() => setSkipThumbnail(true)} />
         );
     }
     return (
