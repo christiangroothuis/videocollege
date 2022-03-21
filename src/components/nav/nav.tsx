@@ -9,7 +9,7 @@ import { ReactComponent as Clock } from '../../assets/icons/clock.svg';
 import { ReactComponent as Search } from '../../assets/icons/search.svg';
 import { ReactComponent as Github } from '../../assets/icons/github.svg';
 
-import logoBg from '../../assets/images/christmas.jpg';
+// import logoBg from '../../assets/images/christmas.jpg';
 
 import './nav.css';
 
