@@ -1,0 +1,85 @@
+.player-container {
+    @apply flex bg-black p-4 relative overflow-hidden justify-center items-center flex-col;
+}
+
+.player-container video {
+    @apply absolute w-full h-full top-0 left-0 object-contain;
+}
+
+.player-container .overlay {
+    @apply w-full h-full absolute border-4 border-neutral-400 opacity-40;
+}
+
+.player-container.horizontal,
+.player-container.wide {
+    @apply flex-row;
+}
+
+.player-container.vertical {
+    @apply flex-col;
+}
+
+.player-container.switched.horizontal,
+.player-container.switched.wide {
+    @apply flex-row-reverse;
+}
+
+.player-container.switched {
+    @apply flex-col-reverse;
+}
+
+.player-container.switched.vertical {
+    @apply flex-col-reverse;
+}
+
+.player-container > div {
+    @apply relative m-1 aspect-video max-h-full max-w-full;
+}
+
+.player-container:not(.switched) > div:nth-of-type(1) {
+    @apply w-full;
+}
+
+.player-container.switched > div:nth-of-type(2) {
+    @apply w-full;
+}
+
+.player-container:not(.switched).two-streams.regular > div:nth-of-type(1) {
+    @apply h-[75%] w-auto;
+}
+
+.player-container.switched.two-streams.regular > div:nth-of-type(2) {
+    @apply h-[75%] w-auto;
+}
+
+.player-container:not(.switched).two-streams.horizontal > div:nth-of-type(1) {
+    @apply max-h-[65%] w-auto h-full;
+}
+
+.player-container.switched.two-streams.horizontal > div:nth-of-type(2) {
+    @apply max-h-[65%] w-auto h-full;
+}
+
+.player-container.wide > div {
+    @apply w-full h-auto max-h-full;
+}
+
+.player-container:not(.switched) > div:nth-of-type(2) {
+    @apply grow;
+}
+
+.player-container:not(.switched).vertical > div:nth-of-type(2) {
+    @apply w-full grow-0;
+}
+
+.player-container.switched > div:nth-of-type(1) {
+    @apply grow;
+}
+
+.player-container.switched.vertical > div:nth-of-type(1) {
+    @apply w-full grow-0;
+}
+
+.player-container:not(.two-streams) > div {
+    @apply w-full max-w-full;
+}
