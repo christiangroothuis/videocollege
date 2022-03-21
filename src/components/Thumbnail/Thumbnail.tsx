@@ -34,14 +34,17 @@ export function Thumbnail({
 
     return (
         <Link to={`/presentation/${id}`}>
-            <div className="relative mb-2 aspect-video overflow-hidden rounded bg-slate-600">
+            <div className="relative mb-2 aspect-video overflow-hidden rounded bg-slate-700">
                 {image ? (
                     <img
                         src={insertBeforeExtension(image, '_352_198_low')}
                         onLoad={(e) => {
                             (e.target as HTMLImageElement).style.opacity = '1';
                         }}
-                        className="h-full w-full object-cover opacity-0 transition-opacity"
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                        }}
+                        className="card h-full w-full object-cover opacity-0 transition-opacity"
                         alt=""
                     />
                 ) : (
