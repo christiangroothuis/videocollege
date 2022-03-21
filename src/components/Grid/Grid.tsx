@@ -12,7 +12,7 @@ interface Props {
     presentations: Value[];
 }
 
-export function Grid({ title, isLoading, rows = 4, presentations }: Props) {
+export function Grid({ title, isLoading, rows, presentations }: Props) {
     const innerSectionRef = useRef<HTMLDivElement>(null);
     const [limit, setLimit] = useState(0);
 
@@ -53,7 +53,7 @@ export function Grid({ title, isLoading, rows = 4, presentations }: Props) {
             >
                 {isLoading
                     ? /* eslint-disable react/no-array-index-key */
-                      [...Array(limit)].map((_, i) => <ThumbnailSkeleton key={i} />)
+                      [...Array(rows ? limit : 12)].map((_, i) => <ThumbnailSkeleton key={i} />)
                     : visiblePresentations?.map(({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl }: Value) => (
                           <Thumbnail
                               key={Id}
