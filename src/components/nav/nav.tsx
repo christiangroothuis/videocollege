@@ -1,7 +1,7 @@
 import React from 'react';
-import Divider from './divider';
-import NavIcon from './navIcon';
-import ChannelIcon from './channelIcon';
+import Divider from './Divider';
+import NavIcon from './NavIcon';
+import ChannelIcon from './ChannelIcon';
 
 import { ReactComponent as Logo } from '../../assets/tue-logo/logo-old.svg';
 import { ReactComponent as Home } from '../../assets/icons/home.svg';
@@ -11,7 +11,9 @@ import { ReactComponent as Github } from '../../assets/icons/github.svg';
 
 import logoBg from '../../assets/images/christmas.jpg';
 
-function Nav() {
+import './nav.css';
+
+export function Nav() {
     return (
         <nav className="fixed top-0 flex min-h-screen w-20 shrink-0 bg-bgsecondary">
             <div style={{ overflow: 'hidden scroll' }} className="h-screen flex-auto pt-4">
@@ -78,5 +80,3 @@ function Nav() {
         </nav>
     );
 }
-
-export default Nav;

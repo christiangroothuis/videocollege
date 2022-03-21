@@ -8,7 +8,7 @@ interface Props {
     children?: React.ReactNode;
 }
 
-function NavIcon({ to, className, children, noActive = false }: Props) {
+export function NavIcon({ to, className, children, noActive = false }: Props) {
     const resolved = useResolvedPath(to);
     const match = useMatch({ path: resolved.pathname, end: true });
 
@@ -51,5 +51,3 @@ function NavIcon({ to, className, children, noActive = false }: Props) {
         </NavLink>
     );
 }
-
-export default NavIcon;
