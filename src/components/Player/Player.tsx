@@ -5,17 +5,18 @@ import { Video } from './Video';
 import './player.css';
 
 export interface PlayerProps extends React.HTMLAttributes<HTMLDivElement> {
-    presentationId: string;
     videoUrls: string[];
 }
 
-export function Player({ presentationId, videoUrls, className }: PlayerProps) {
+export function Player({ videoUrls, className }: PlayerProps) {
     const primaryVideoRef = useRef<HTMLVideoElement>(null);
     const secondaryVideoRef = useRef<HTMLVideoElement>(null);
     const playerContainerRef = useRef<HTMLDivElement>(null);
 
     const [direction, setDirection] = useState('');
     const [switched, setSwitched] = useState(false);
+
+    const multipleVideos = videoUrls.length > 1;
 
     useLayoutEffect(() => {
         const handleWindowResize = () => {
@@ -46,18 +47,21 @@ export function Player({ presentationId, videoUrls, className }: PlayerProps) {
         <div className={className}>
             <div
                 className={`player-container h-full w-full ${direction} ${
-                    videoUrls?.length > 1 && switched ? 'switched' : ''
-                } ${videoUrls?.length > 1 ? 'two-streams' : ''}`}
+                    multipleVideos && switched ? 'switched' : ''
+                } ${multipleVideos ? 'two-streams' : ''}`}
                 ref={playerContainerRef}
             >
                 <Video videoUrls={videoUrls} primaryVideoRef={primaryVideoRef} secondaryVideoRef={secondaryVideoRef} />
-                <span
-                    className="absolute top-0 right-0 m-3 cursor-pointer select-none rounded-lg
+                {multipleVideos && (
+                    <button
+                        className="absolute top-0 right-0 m-3 cursor-pointer select-none rounded-lg
                              bg-white p-2 font-medium text-bgtertiary shadow-md"
-                    onClick={() => setSwitched(!switched)}
-                >
-                    Switch
-                </span>
+                        onClick={() => setSwitched(!switched)}
+                        type="button"
+                    >
+                        Switch
+                    </button>
+                )}
             </div>
         </div>
     );
