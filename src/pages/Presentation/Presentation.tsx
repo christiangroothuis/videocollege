@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { dateToString, dateToText } from '../../helpers/dateToString';
 import { usePresentation, usePresentationSearch } from '../../service/api';
 import { PlayerWrapper } from '../../components/Player/PlayerWrapper';
-import SmallThumbnail from '../../components/SmallThumbnail';
+import SmallThumbnail from '../../components/Thumbnail/SmallThumbnail';
 
 import { Value } from '../../interfaces/Presentations.interface';
 
@@ -56,10 +56,7 @@ export function Presentation() {
         <div className="grid gap-4 xl:grid-cols-[1fr_22rem]">
             <div className="overflow-hidden ">
                 <div className="relative aspect-video min-h-[60vh] w-full max-w-full overflow-hidden rounded-2xl bg-black xl:h-[75vh]">
-                    <PlayerWrapper
-                        // className="w-full h-full absolute left-0 top-0"
-                        presentationId={presentationId!}
-                    />
+                    <PlayerWrapper presentationId={presentationId!} />
                 </div>
                 <div className="mt-3 min-h-[12rem] rounded-2xl bg-bgsecondary p-8 pt-7">{description}</div>
             </div>

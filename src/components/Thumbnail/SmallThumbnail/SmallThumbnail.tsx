@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
-import { ReactComponent as Broadcast } from '../../assets/icons/wifi.svg';
+import { ReactComponent as Broadcast } from '../../../assets/icons/wifi.svg';
 
-import { dateToText } from '../../helpers/dateToString';
-import { msToHHmmss } from '../../helpers/msToHHmmss';
-import { stringToColor } from '../../helpers/stringToColor';
+import { dateToText } from '../../../helpers/dateToString';
+import { msToHHmmss } from '../../../helpers/msToHHmmss';
+import { stringToColor } from '../../../helpers/stringToColor';
 
 export function SmallThumbnail({
     id,

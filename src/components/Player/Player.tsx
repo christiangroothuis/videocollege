@@ -1,6 +1,4 @@
-import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
-
-import { PlayerOptions, Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import { Video } from './Video';
 
@@ -8,25 +6,16 @@ import './player.css';
 
 export interface PlayerProps extends React.HTMLAttributes<HTMLDivElement> {
     presentationId: string;
-    playerOptions: PlayerOptions;
+    videoUrls: string[];
 }
 
-export function Player({ presentationId, playerOptions, className }: PlayerProps) {
+export function Player({ presentationId, videoUrls, className }: PlayerProps) {
     const primaryVideoRef = useRef<HTMLVideoElement>(null);
     const secondaryVideoRef = useRef<HTMLVideoElement>(null);
     const playerContainerRef = useRef<HTMLDivElement>(null);
 
     const [direction, setDirection] = useState('');
     const [switched, setSwitched] = useState(false);
-
-    const streams = useMemo(
-        () =>
-            playerOptions?.Presentation?.Streams.map(
-                (stream: Stream) =>
-                    stream.VideoUrls.filter((videoUrl: VideoURL) => videoUrl.MimeType === 'audio/x-mpegurl')[0]
-            ),
-        [playerOptions]
-    );
 
     useLayoutEffect(() => {
         const handleWindowResize = () => {
@@ -57,11 +46,11 @@ export function Player({ presentationId, playerOptions, className }: PlayerProps
         <div className={className}>
             <div
                 className={`player-container h-full w-full ${direction} ${
-                    streams?.length > 1 && switched ? 'switched' : ''
-                } ${streams?.length > 1 ? 'two-streams' : ''}`}
+                    videoUrls?.length > 1 && switched ? 'switched' : ''
+                } ${videoUrls?.length > 1 ? 'two-streams' : ''}`}
                 ref={playerContainerRef}
             >
-                <Video streams={streams} primaryVideoRef={primaryVideoRef} secondaryVideoRef={secondaryVideoRef} />
+                <Video videoUrls={videoUrls} primaryVideoRef={primaryVideoRef} secondaryVideoRef={secondaryVideoRef} />
                 <span
                     className="absolute top-0 right-0 m-3 cursor-pointer select-none rounded-lg
                              bg-white p-2 font-medium text-bgtertiary shadow-md"

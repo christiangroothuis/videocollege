@@ -210,22 +210,22 @@ export const useChannelSearch = ({
     };
 };
 
-export const useLastPresentations = ({ date, amountPerPage = 24 }: { date: Date; amountPerPage: number }) => {
+export const useLastPresentations = ({ date, amountPerPage = 12 }: { date: Date; amountPerPage: number }) => {
     const currentTimeString = dateToString(new Date());
     const nextYearString = dateToString(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
 
     return usePresentationSearch({
         query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation AirDateTimeUtc:[${currentTimeString} TO ${nextYearString}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
-        amountPerPage: 12,
+        amountPerPage,
     });
 };
 
-export const useNextPresentations = ({ date, amountPerPage = 24 }: { date: Date; amountPerPage: number }) => {
+export const useNextPresentations = ({ date, amountPerPage = 12 }: { date: Date; amountPerPage: number }) => {
     const currentTimeString = dateToString(new Date());
     const nextYearString = dateToString(new Date(new Date().setFullYear(new Date().getFullYear() - 1)));
 
     return usePresentationSearch({
         query: `(2IC30 OR 2IAB0 OR 2IL50) Type:Presentation AirDateTimeUtc:[${currentTimeString} TO ${nextYearString}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True`,
-        amountPerPage: 12,
+        amountPerPage,
     });
 };

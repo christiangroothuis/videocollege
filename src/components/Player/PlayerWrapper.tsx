@@ -1,35 +1,13 @@
 import React, { useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+
 import { usePlayCoverInfo, usePlayerOptions } from '../../service/api';
+
 import { Player } from './Player';
 import GridSpinner from '../GridSpinner';
+import Preview from './Preview';
+import ErrorBound from './ErrorBound';
 
-import { ReactComponent as PlayIcon } from '../../assets/icons/play.svg';
-
-interface PlayerPreviewProps {
-    thumbnailUrl?: string;
-    onClick: (value: React.SetStateAction<boolean>) => void;
-}
-
-function PlayerPreview({ thumbnailUrl, onClick }: PlayerPreviewProps) {
-    return (
-        <div className="flex h-full w-full cursor-pointer items-center justify-center" onClick={() => onClick(true)}>
-            {thumbnailUrl && (
-                <img
-                    className="absolute top-0 left-0 h-full w-full object-cover opacity-0 transition-opacity duration-300"
-                    src={`https://videocollege.tue.nl${thumbnailUrl}`}
-                    alt=""
-                    onLoad={(e) => {
-                        (e.target as HTMLImageElement).style.opacity = '1';
-                    }}
-                />
-            )}
-            <div className="relative rounded-full bg-white p-6 shadow-xl">
-                <PlayIcon className="ml-1 h-10 w-10 text-bgtertiary" />
-            </div>
-        </div>
-    );
-}
+import { Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
 
 interface Props {
     presentationId: string;
@@ -60,50 +38,30 @@ function PlayerContent({ presentationId }: Props) {
 
     if (!skipThumbnail) {
         return (
-            <PlayerPreview
-                thumbnailUrl={playerOptions.Presentation.ThumbnailUrl}
-                onClick={() => setSkipThumbnail(true)}
-            />
+            <Preview thumbnailUrl={playerOptions.Presentation.ThumbnailUrl} onClick={() => setSkipThumbnail(true)} />
         );
     }
+
+    const streams = playerOptions?.Presentation?.Streams.map(
+        (stream: Stream) =>
+            stream.VideoUrls.filter((videoUrl: VideoURL) => videoUrl.MimeType === 'audio/x-mpegurl')[0].Location
+    );
+
     return (
         <Player
-            playerOptions={playerOptions}
+            videoUrls={streams}
             presentationId={presentationId!}
             className="flex h-full w-full items-center justify-center"
         />
     );
 }
 
-function ErrorFallback({
-    error,
-    resetErrorBoundary,
-}: {
-    error: Error;
-    resetErrorBoundary: (...args: Array<unknown>) => void;
-}) {
-    return (
-        <div role="alert" className="flex h-full flex-col items-center justify-center bg-black">
-            <p>Something went wrong:</p>
-            <pre>{error.message}</pre>
-            <button className="underline" onClick={resetErrorBoundary} type="button">
-                Try again
-            </button>
-        </div>
-    );
-}
-
 export function PlayerWrapper({ presentationId }: Props) {
     return (
-        <ErrorBoundary
-            FallbackComponent={ErrorFallback}
-            onReset={() => {
-                // reset the state of your app so the error doesn't happen again
-            }}
-        >
-            <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+        <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+            <ErrorBound>
                 <PlayerContent presentationId={presentationId} />
-            </div>
-        </ErrorBoundary>
+            </ErrorBound>
+        </div>
     );
 }

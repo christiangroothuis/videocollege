@@ -3,22 +3,20 @@ import HlsPlayer from 'react-hls-player';
 
 import { VideoURL } from '../../interfaces/PlayerOptions.interface';
 
+interface VideoProps {
+    videoUrls: string[];
+    primaryVideoRef: React.RefObject<HTMLVideoElement>;
+    secondaryVideoRef: React.RefObject<HTMLVideoElement>;
+}
+
 export const Video = React.memo(
-    ({
-        streams,
-        primaryVideoRef,
-        secondaryVideoRef,
-    }: {
-        streams: VideoURL[];
-        primaryVideoRef: React.RefObject<HTMLVideoElement>;
-        secondaryVideoRef: React.RefObject<HTMLVideoElement>;
-    }) => {
+    ({ videoUrls, primaryVideoRef, secondaryVideoRef }: VideoProps) => {
         return (
             <>
-                {streams.map(({ Location }: VideoURL, i: number) => (
-                    <div className="video overflow-hidden rounded-lg" key={Location}>
+                {videoUrls.map((videoUrl, i) => (
+                    <div className="video overflow-hidden rounded-lg" key={videoUrl}>
                         <HlsPlayer
-                            src={Location}
+                            src={videoUrl}
                             autoPlay
                             controls={false}
                             muted={i !== 0}
@@ -31,8 +29,8 @@ export const Video = React.memo(
         );
     },
     // Only rerender when the stream urls have changed
-    ({ streams: prevStreams }, { streams: nextStreams }) => {
-        if (prevStreams !== nextStreams) {
+    ({ videoUrls: prevVideoUrls }, { videoUrls: nextVideoUrls }) => {
+        if (prevVideoUrls !== nextVideoUrls) {
             return false;
         }
 

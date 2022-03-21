@@ -55,6 +55,7 @@ export function Nav() {
                     </div>
                     <a
                         className="nav-item-wrapper group"
+                        title="Github"
                         href="https://github.com/christiangroothuis/videocollege/"
                         target="_blank"
                         rel="noopener noreferrer"
