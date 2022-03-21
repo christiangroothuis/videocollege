@@ -29,12 +29,14 @@ export function Thumbnail({
 }) {
     const isLive = playStatus === 'Live';
     const isRecorded = playStatus === 'OnDemand' && status === 'Viewable';
-    const isTranscoding = status === 'Transcoding';
-    const isScheduled = playStatus === 'ScheduledForLive' && status === 'Record';
+    const isTranscoding = playStatus === 'LiveEnded' && status === 'Recorded';
+    const isScheduled =
+        (playStatus === 'ScheduledForLive' && status === 'Record') ||
+        (playStatus === 'OpenForLive' && status === 'OpenForRecord');
 
     return (
         <Link to={`/presentation/${id}`}>
-            <div className="relative mb-2 aspect-video overflow-hidden rounded bg-slate-700">
+            <div className="relative mb-2 aspect-video overflow-hidden rounded">
                 {image ? (
                     <img
                         src={insertBeforeExtension(image, '_352_198_low')}
