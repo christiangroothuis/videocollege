@@ -10,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Course from './pages/Course';
 import Presentation from './pages/Presentation';
+import Player from './pages/Player';
 
 import './index.css';
 
@@ -31,7 +32,7 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="course/:id" element={<Course />} />
                             <Route path="presentation/:id" element={<Presentation />} />
-                            {/* <Route path="player/:id" element={<Player />} /> */}
+                            <Route path="player/:id" element={<Player />} />
                         </Routes>
                     </Layout>
                 </Router>

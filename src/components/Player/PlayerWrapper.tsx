@@ -29,9 +29,11 @@ function PlayerContent({ presentationId }: Props) {
     } = usePlayerOptions(presentationId);
 
     // TODO Check if stream is started with GetLiveStatus
+
     if (coverInfoIsLoading || playerOptionsIsLoading) {
         return <GridSpinner />;
     }
+
     if (coverInfoIsError || playerOptionsIsError) {
         return <div>Error. Try reloading the page</div>;
     }
@@ -42,18 +44,13 @@ function PlayerContent({ presentationId }: Props) {
         );
     }
 
+    // Get stream locations
     const streams = playerOptions?.Presentation?.Streams.map(
         (stream: Stream) =>
-            stream.VideoUrls.filter((videoUrl: VideoURL) => videoUrl.MimeType === 'audio/x-mpegurl')[0].Location
+            stream.VideoUrls.filter((videoUrl: VideoURL) => videoUrl.MimeType === 'audio/x-mpegurl')[0]?.Location
     );
 
-    return (
-        <Player
-            videoUrls={streams}
-            presentationId={presentationId!}
-            className="flex h-full w-full items-center justify-center"
-        />
-    );
+    return <Player videoUrls={streams} className="flex h-full w-full items-center justify-center" />;
 }
 
 export function PlayerWrapper({ presentationId }: Props) {

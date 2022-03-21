@@ -78,49 +78,49 @@ export interface Value {
     ThumbnailUrl: null | string;
     IsLive: boolean;
     CreationDate: Date;
-    PlayerId: string;
-    PresentationTemplateId: null;
-    AlternateName: null;
-    CopyrightNotice: null;
-    MaximumConnections: number;
-    PublishingPointName: null;
-    IsUploadAutomatic: boolean;
-    TimeZone: TimeZone;
-    PollsEnabled: boolean;
-    LiveCountdownEnabled: boolean;
-    LiveIndicationDelayed: boolean;
-    ForumsEnabled: boolean;
-    SharingEnabled: boolean;
-    PlayerLocked: boolean;
-    PollsInternal: boolean;
-    Private: boolean;
-    NotifyOnMetadataChanged: boolean;
-    ApprovalState: ApprovalState;
-    ApprovalRequiredChangeTypes: ApprovalRequiredChangeTypes;
-    IsApproved: boolean;
-    ContentRevision: number;
-    PollLink: null;
-    ParentFolderName: string;
-    ParentFolderId: string;
-    DisplayRecordDate: Date;
-    IsLiveEnabled: boolean;
-    PlayStatus: PlayStatus;
-    CustomFieldValues: CustomFieldValue[];
-    TagList: any[];
-    IsHeadRevisionContentComplete: boolean;
-    TotalFileLength: string;
-    ExternalLinks: any[];
-    Streams: Stream[];
-    UseAdaptiveCapture: boolean;
-    AnnotationMode: AnnotationMode;
-    InheritPermissions: boolean;
-    ThumbnailGenerateOption: ThumbnailGenerateOption;
-    IsDvrPlaybackEnabled: boolean;
-    DvrBufferDurationMaximum: null;
-    IsExternalVideo: boolean;
-    HasQuizzes: boolean;
-    ExternalVideoData: ExternalVideoData;
-    MosaicRecorderSessionId: null;
+    PlayerId?: string;
+    PresentationTemplateId?: null;
+    AlternateName?: null;
+    CopyrightNotice?: null;
+    MaximumConnections?: number;
+    PublishingPointName?: null;
+    IsUploadAutomatic?: boolean;
+    TimeZone?: TimeZone;
+    PollsEnabled?: boolean;
+    LiveCountdownEnabled?: boolean;
+    LiveIndicationDelayed?: boolean;
+    ForumsEnabled?: boolean;
+    SharingEnabled?: boolean;
+    PlayerLocked?: boolean;
+    PollsInternal?: boolean;
+    Private?: boolean;
+    NotifyOnMetadataChanged?: boolean;
+    ApprovalState?: ApprovalState;
+    ApprovalRequiredChangeTypes?: ApprovalRequiredChangeTypes;
+    IsApproved?: boolean;
+    ContentRevision?: number;
+    PollLink?: null;
+    ParentFolderName?: string;
+    ParentFolderId?: string;
+    DisplayRecordDate?: Date;
+    IsLiveEnabled?: boolean;
+    PlayStatus?: PlayStatus;
+    CustomFieldValues?: CustomFieldValue[];
+    TagList?: any[];
+    IsHeadRevisionContentComplete?: boolean;
+    TotalFileLength?: string;
+    ExternalLinks?: any[];
+    Streams?: Stream[];
+    UseAdaptiveCapture?: boolean;
+    AnnotationMode?: AnnotationMode;
+    InheritPermissions?: boolean;
+    ThumbnailGenerateOption?: ThumbnailGenerateOption;
+    IsDvrPlaybackEnabled?: boolean;
+    DvrBufferDurationMaximum?: null;
+    IsExternalVideo?: boolean;
+    HasQuizzes?: boolean;
+    ExternalVideoData?: ExternalVideoData;
+    MosaicRecorderSessionId?: null;
 }
 
 export interface AddCaptionContent {
@@ -165,6 +165,7 @@ export interface ExternalVideoData {
 
 export enum PlayStatus {
     NotAvailable = 'NotAvailable',
+    Live = 'Live',
     OnDemand = 'OnDemand',
     ScheduledForLive = 'ScheduledForLive',
 }
@@ -187,6 +188,11 @@ export enum Status {
     Recording = 'Recording',
     Unavailable = 'Unavailable',
 }
+
+// Recorded Lecture: OnDemand && Viewable
+// Live Lecture: Live && Live
+// Unsed Lecture: ScheduledForLive && Record
+// Scheduled Lecture: ScheduledForLive && Record
 
 export interface Stream {
     StreamType: StreamType;

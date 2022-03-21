@@ -8,14 +8,5 @@ interface Props {
 }
 
 export function ErrorBound({ children }: Props) {
-    return (
-        <ErrorBoundary
-            FallbackComponent={ErrorFallback}
-            onReset={() => {
-                // reset the state of your app so the error doesn't happen again
-            }}
-        >
-            {children}
-        </ErrorBoundary>
-    );
+    return <ErrorBoundary FallbackComponent={ErrorFallback}>{children}</ErrorBoundary>;
 }

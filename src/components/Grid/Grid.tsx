@@ -54,16 +54,19 @@ export function Grid({ title, isLoading, rows, presentations }: Props) {
                 {isLoading
                     ? /* eslint-disable react/no-array-index-key */
                       [...Array(rows ? limit : 12)].map((_, i) => <ThumbnailSkeleton key={i} />)
-                    : visiblePresentations?.map(({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl }: Value) => (
-                          <Thumbnail
-                              key={Id}
-                              id={Id}
-                              title={Title}
-                              recordDate={RecordDateLocal}
-                              duration={Duration}
-                              image={ThumbnailUrl}
-                          />
-                      ))}
+                    : visiblePresentations?.map(
+                          ({ Id, Title, RecordDateLocal, Duration, ThumbnailUrl, Status }: Value) => (
+                              <Thumbnail
+                                  key={Id}
+                                  id={Id}
+                                  title={Title}
+                                  recordDate={RecordDateLocal}
+                                  duration={Duration}
+                                  image={ThumbnailUrl}
+                                  isLive={Status === 'Live'}
+                              />
+                          )
+                      )}
             </div>
         </div>
     );

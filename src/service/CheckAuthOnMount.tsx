@@ -8,5 +8,9 @@ export default function CheckAuthOnMount() {
         window.location.href = `https://videocollege.tue.nl/Mediasite/Login/saml?ReturnUrl=${window.location.href}`;
     }
 
+    if (isError) {
+        alert('This site currently requires a firefox extension!');
+    }
+
     return null;
 }
