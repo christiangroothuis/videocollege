@@ -166,6 +166,8 @@ export interface ExternalVideoData {
 export enum PlayStatus {
     NotAvailable = 'NotAvailable',
     Live = 'Live',
+    LiveEnded = 'LiveEnded',
+    OpenForLive = 'OpenForLive',
     OnDemand = 'OnDemand',
     ScheduledForLive = 'ScheduledForLive',
 }
