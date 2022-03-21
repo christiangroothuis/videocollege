@@ -215,6 +215,7 @@ export const useNextLectures = (
         )}] AND (Status:Viewable OR Status:Live OR (Status:Record AND IsLiveEnabled:True) OR (Status:OpenForRecord AND IsLiveEnabled:True)) AND IsApproved:True ${
             folderIds.length > 0 ? `AND (${string})` : ''
         }`,
+        orderBy: 'RecordDate asc',
     });
 };
 

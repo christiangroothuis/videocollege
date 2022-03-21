@@ -13,6 +13,11 @@ export function Course() {
 
     return (
         <>
+            {isLoadingUpcomingLectures ? (
+                <h1 className="card mb-4 w-1/4 animate-pulse rounded text-3xl font-bold text-red-500/0">Course</h1>
+            ) : (
+                <h1 className="mb-4 text-3xl font-bold">{data?.value[0]?.ParentFolderName}</h1>
+            )}
             <Grid
                 title="Upcoming lectures"
                 isLoading={isLoadingUpcomingLectures}
