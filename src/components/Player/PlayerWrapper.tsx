@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 
 import { usePlayCoverInfo, usePlayerOptions } from '../../service/api';
 
 import { Player } from './Player';
 import GridSpinner from '../GridSpinner';
 import Preview from './Preview';
+import ErrorBound from './ErrorBound';
+
+import { Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
 
 interface Props {
     presentationId: string;
@@ -39,44 +41,27 @@ function PlayerContent({ presentationId }: Props) {
             <Preview thumbnailUrl={playerOptions.Presentation.ThumbnailUrl} onClick={() => setSkipThumbnail(true)} />
         );
     }
+
+    const streams = playerOptions?.Presentation?.Streams.map(
+        (stream: Stream) =>
+            stream.VideoUrls.filter((videoUrl: VideoURL) => videoUrl.MimeType === 'audio/x-mpegurl')[0].Location
+    );
+
     return (
         <Player
-            playerOptions={playerOptions}
+            videoUrls={streams}
             presentationId={presentationId!}
             className="flex h-full w-full items-center justify-center"
         />
     );
 }
 
-function ErrorFallback({
-    error,
-    resetErrorBoundary,
-}: {
-    error: Error;
-    resetErrorBoundary: (...args: Array<unknown>) => void;
-}) {
-    return (
-        <div role="alert" className="flex h-full flex-col items-center justify-center bg-black">
-            <p>Something went wrong:</p>
-            <pre>{error.message}</pre>
-            <button className="underline" onClick={resetErrorBoundary} type="button">
-                Try again
-            </button>
-        </div>
-    );
-}
-
 export function PlayerWrapper({ presentationId }: Props) {
     return (
-        <ErrorBoundary
-            FallbackComponent={ErrorFallback}
-            onReset={() => {
-                // reset the state of your app so the error doesn't happen again
-            }}
-        >
-            <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+        <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+            <ErrorBound>
                 <PlayerContent presentationId={presentationId} />
-            </div>
-        </ErrorBoundary>
+            </ErrorBound>
+        </div>
     );
 }
