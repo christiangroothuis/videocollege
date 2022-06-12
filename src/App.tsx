@@ -13,7 +13,7 @@ import Course from './pages/Course';
 import Player from './pages/Player';
 import Presentation from './pages/Presentation';
 
-import './index.css';
+import './index.csss';
 
 function App() {
     return (
