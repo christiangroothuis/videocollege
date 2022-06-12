@@ -9,7 +9,7 @@ export function Home() {
     const { data: data2, isLoading: isLoadingLastLectures, isError: isError2 } = useLastLectures();
 
     return (
-        <>
+        <div className="container mx-auto">
             <Grid
                 title="Upcoming lectures"
                 isLoading={isLoadingUpcomingLectures}
@@ -17,6 +17,6 @@ export function Home() {
                 presentations={data?.value}
             />
             <Grid title="Last lectures" isLoading={isLoadingLastLectures} presentations={data2?.value} />
-        </>
+        </div>
     );
 }
