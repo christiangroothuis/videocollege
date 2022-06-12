@@ -12,12 +12,7 @@ export function Course() {
     const { data: data2, isLoading: isLoadingLastLectures, isError: isError2 } = useLastLectures(folderId!);
 
     return (
-        <>
-            {isLoadingUpcomingLectures ? (
-                <h1 className="card mb-4 w-1/4 animate-pulse rounded text-3xl font-bold text-red-500/0">Course</h1>
-            ) : (
-                <h1 className="mb-4 text-3xl font-bold">{data?.value[0]?.ParentFolderName}</h1>
-            )}
+        <div className="container mx-auto">
             <Grid
                 title="Upcoming lectures"
                 isLoading={isLoadingUpcomingLectures}
@@ -25,6 +20,6 @@ export function Course() {
                 presentations={data?.value}
             />
             <Grid title="Last lectures" isLoading={isLoadingLastLectures} presentations={data2?.value} />
-        </>
+        </div>
     );
 }
