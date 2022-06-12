@@ -33,7 +33,7 @@ export function NavIcon({ to, className, children, noActive = false }: Props) {
             </motion.div>
             <NavLink to={to}>
                 <motion.div
-                    layout="position"
+                    // layout="position"
                     // initial={{ opacity: 0, scale: 0.3 }}
                     // animate={{ opacity: 1, scale: 1 }}
                     // exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
