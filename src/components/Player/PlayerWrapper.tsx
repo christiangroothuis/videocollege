@@ -5,7 +5,6 @@ import { usePlayCoverInfo, usePlayerOptions } from '../../service/api';
 import { Player } from './Player';
 import GridSpinner from '../GridSpinner';
 import Preview from './Preview';
-import ErrorBound from './ErrorBound';
 
 import { Stream, VideoURL } from '../../interfaces/PlayerOptions.interface';
 
@@ -56,9 +55,7 @@ function PlayerContent({ presentationId }: Props) {
 export function PlayerWrapper({ presentationId }: Props) {
     return (
         <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
-            <ErrorBound>
-                <PlayerContent presentationId={presentationId} />
-            </ErrorBound>
+            <PlayerContent presentationId={presentationId} />
         </div>
     );
 }
