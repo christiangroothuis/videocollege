@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PlayStatus, Status } from '@/interfaces/Presentations.interface';
@@ -34,6 +34,12 @@ export function Thumbnail({
         (playStatus === 'ScheduledForLive' && status === 'Record') ||
         (playStatus === 'OpenForLive' && status === 'OpenForRecord');
 
+    // Move background gradient to its own component
+    const backgroundStyle = useMemo(
+        () => ({ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }),
+        [id]
+    );
+
     return (
         <Link to={`/presentation/${id}`}>
             <div className="relative mb-2 aspect-video overflow-hidden rounded">
@@ -53,10 +59,7 @@ export function Thumbnail({
                         alt=""
                     />
                 ) : (
-                    <div
-                        className="flex h-full w-full items-center justify-center"
-                        style={{ backgroundImage: `linear-gradient(135deg, #38426a 0%, ${stringToColor(id)} 100%)` }}
-                    >
+                    <div className="flex h-full w-full items-center justify-center" style={backgroundStyle}>
                         <Broadcast className="h-18 w-18 text-black opacity-25" />
                     </div>
                 )}
