@@ -14,20 +14,20 @@ interface Props {
 
 export function Grid({ title, isLoading, rows, presentations }: Props) {
     const innerSectionRef = useRef<HTMLDivElement>(null);
+    const columns = useRef(0);
     const [limit, setLimit] = useState(0);
 
-    let columns = 0;
     let visiblePresentations = presentations;
 
     useLayoutEffect(() => {
         const handleWindowResize = () => {
             if (innerSectionRef.current) {
-                columns = getComputedStyle(innerSectionRef.current)
+                columns.current = getComputedStyle(innerSectionRef.current)
                     .getPropertyValue('grid-template-columns')
                     .split(' ').length;
 
                 if (rows) {
-                    setLimit(columns * rows);
+                    setLimit(columns.current * rows);
                 }
             }
         };
