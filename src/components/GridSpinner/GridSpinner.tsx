@@ -66,7 +66,7 @@ interface GetBalls {
 }
 
 const getBalls = ({ countBallsInLine, color, size, sizeUnit }: GetBalls) => {
-    const balls: any[] = [];
+    const balls: JSX.Element[] = [];
     let keyValue = 0;
     for (let i = 0; i < countBallsInLine; i += 1) {
         for (let j = 0; j < countBallsInLine; j += 1) {
