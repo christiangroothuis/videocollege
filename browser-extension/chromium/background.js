@@ -204,7 +204,7 @@ cors.onBeforeSendHeaders = async (d) => {
     if (d.type === 'main_frame') {
         return;
     }
-    if (!d.url.includes('https://videocollege.tue.nl') || d.initiator !== 'http://localhost:3000') {
+    if (!d.url.startsWith('https://videocollege.tue.nl') || d.initiator !== 'http://localhost:3000') {
         return;
     }
 
