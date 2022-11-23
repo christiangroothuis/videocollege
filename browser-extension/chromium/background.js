@@ -38,7 +38,7 @@
 //         // store transaction
 //         videocollegeHelper.transactions[request.requestId] = transaction;
 
-//         // if (transaction.request.url.includes("https://videocollege.tue.nl") && transaction.request.initiator.includes("http://localhost:3000")) {
+//         // if (transaction.request.url.startsWith("https://videocollege.tue.nl") && transaction.request.initiator.includes("http://localhost:3000")) {
 //         //     const { name, value } = await chrome.cookies.get({
 //         //         name: "MediasiteAuth",
 //         //         url: "https://videocollege.tue.nl"
