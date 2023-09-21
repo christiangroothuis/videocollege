@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import { SWRConfig } from 'swr';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import CheckAuthOnMount from './service/CheckAuthOnMount';
 
@@ -9,8 +10,8 @@ import ScrollToTop from './components/ScrollToTop';
 
 import Home from './pages/Home';
 import Course from './pages/Course';
-import Presentation from './pages/Presentation';
 import Player from './pages/Player';
+import Presentation from './pages/Presentation';
 
 import './index.css';
 
