@@ -45,9 +45,10 @@ export function Nav() {
 
                     <Divider />
 
-                    <ChannelIcon to="/course/e7addfbea5ea4c6cbabb2f691e23034c14" text="2WF80 [2022-2023]" />
-                    <ChannelIcon to="/course/c2c6c76a47fa4b4dbedc5586eea75e0614" text="2ID50 [2022-2023]" />
-                    <ChannelIcon to="/course/8ece3e3826c947fcb2765647d150ef4f14" text="2IPC0 [2022-2023]" />
+                    <ChannelIcon to="/course/0cfafff08cd04fbb8c0c36be6f4cf5b214" text="2ILC0 [2023-2024]" />
+                    <ChannelIcon to="/course/4fe0534d51b54851a148d1fd5ec9ca1214" text="2WF90 [2023-2024]" />
+                    <ChannelIcon to="/course/72dca20eee074191b688a152991438a714" text="2DI90 [2023-2024]" />
+                    <ChannelIcon to="/course/2b5f25817b2f468dbda51fc00c89288614" text="2IT90 [2023-2024]" />
                 </div>
                 <div className="fixed bottom-0 bg-bgsecondary pb-2">
                     <div className="nav-item-wrapper pb-2">
