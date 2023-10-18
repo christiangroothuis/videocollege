@@ -1,0 +1,47 @@
+{
+    "name": "videocollege-tauri",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "tauri": "tauri"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.2.1",
+        "@tauri-apps/api": "^1.5.0",
+        "dayjs": "^1.11.0",
+        "framer-motion": "^6.2.8",
+        "react-hls-player": "^3.0.7",
+        "swr": "^1.1.1",
+        "vite-plugin-svgr": "^2.2.1",
+        "styled-components": "^5.3.3",
+        "tailwindcss": "^3.1.8"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.15",
+        "@types/react-dom": "^18.2.7",
+        "@vitejs/plugin-react": "^4.0.3",
+        "typescript": "^5.0.2",
+        "vite": "^4.4.4",
+        "@tauri-apps/cli": "^1.5.0",
+        "prettier-plugin-tailwindcss": "^0.1.8",
+        "@types/styled-components": "^5.1.24",
+        "autoprefixer": "^10.4.12",
+        "eslint": "^8.11.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-import-resolver-typescript": "^2.5.0",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.29.4",
+        "eslint-plugin-react-hooks": "^4.3.0",
+        "postcss": "^8.4.16",
+        "prettier": "^2.6.0"
+    }
+}
