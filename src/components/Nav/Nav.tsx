@@ -46,7 +46,8 @@ export function Nav() {
                     <Divider />
 
                     <ChannelIcon to="/course/0cfafff08cd04fbb8c0c36be6f4cf5b214" text="2ILC0 [2023-2024]" />
-                    <ChannelIcon to="/course/4fe0534d51b54851a148d1fd5ec9ca1214" text="2WF90 [2023-2024]" />
+                    <ChannelIcon to="/course/7c19a3e5d38846d8a089ccff443b07b514" text="2WF80 [2023-2024]" />
+                    <ChannelIcon to="/course/e7addfbea5ea4c6cbabb2f691e23034c14" text="2WF80 [2022-2023]" />
                     <ChannelIcon to="/course/72dca20eee074191b688a152991438a714" text="2DI90 [2023-2024]" />
                     <ChannelIcon to="/course/2b5f25817b2f468dbda51fc00c89288614" text="2IT90 [2023-2024]" />
                 </div>
